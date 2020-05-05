@@ -44,9 +44,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    // this.router.navigateByUrl('/auth/login');
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => this.initChart());
