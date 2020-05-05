@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 
 import { DashboardService } from './dashboard.srevice';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,10 +40,13 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private dashboardSrv: DashboardService,
     private ngZone: NgZone,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.navigateByUrl('/auth/login');
+  }
 
   ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => this.initChart());
