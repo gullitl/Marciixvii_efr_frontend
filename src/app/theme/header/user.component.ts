@@ -1,3 +1,4 @@
+import { AuthenticationService } from '@shared/services/authentication.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -10,7 +11,7 @@ import { Component } from '@angular/core';
       [matMenuTriggerFor]="menu"
     >
       <img class="matero-avatar" src="assets/images/avatar.jpg" width="32" alt="avatar" />
-      <span class="matero-username" fxHide.lt-sm>Zongbin</span>
+      <span class="matero-username" fxHide.lt-sm>{{username}}</span>
     </button>
 
     <mat-menu #menu="matMenu">
@@ -22,11 +23,24 @@ import { Component } from '@angular/core';
         <mat-icon>settings</mat-icon>
         <span>{{ 'user.settings' | translate }}</span>
       </a>
-      <a routerLink="/auth/login" mat-menu-item>
+      <a mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>{{ 'user.logout' | translate }}</span>
       </a>
     </mat-menu>
   `,
 })
-export class UserComponent {}
+export class UserComponent {
+
+  constructor(private auth: AuthenticationService) {}
+
+  public get username(): string {
+    return this.auth.currentUserValue.username;
+  }
+
+
+  logout() {
+    this.auth.signout();
+  }
+
+}

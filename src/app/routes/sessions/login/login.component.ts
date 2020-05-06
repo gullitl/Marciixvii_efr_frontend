@@ -1,24 +1,37 @@
+import { Utilisateur } from './../../../shared/models/entities/utilisateur.entity';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '@shared/services/authentication.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-  reactiveForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.reactiveForm = this.fb.group({
+  public authForm: FormGroup;
+
+  constructor(private fb: FormBuilder,
+              private auth: AuthenticationService,
+              private router: Router) {
+
+    this.authForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.auth.currentUser.subscribe(utilz => {
+      if (utilz && utilz.token) {
+        this.router.navigateByUrl('/dashboard');
+      }
+    });
+  }
 
   login() {
-    this.router.navigateByUrl('/');
+    this.auth.authenticate(this.authForm.value.username, this.authForm.value.password);
   }
+
 }
