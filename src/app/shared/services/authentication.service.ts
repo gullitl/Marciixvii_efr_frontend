@@ -35,7 +35,7 @@ export class AuthenticationService {
       postnom: 'Lusembo',
       prenom: 'Plamedi',
       sexe: Sexe.Masculin,
-      photo: '',
+      photosrc: 'assets/images/avatar.jpg',
       email: 'plam.l@live.fr',
       username,
       password,
@@ -48,7 +48,7 @@ export class AuthenticationService {
     this.router.navigateByUrl('/dashboard');
   }
 
-  signout() {
+  disconnect() {
     // remove user from local storage to log user out
     this.session.remove('currentUser');
     this.currentUserSubject.next(null);

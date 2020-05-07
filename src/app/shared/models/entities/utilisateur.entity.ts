@@ -7,7 +7,7 @@ export class Utilisateur extends BaseEntity {
   postnom: string;
   prenom: string;
   sexe: Sexe;
-  photo: string;
+  photosrc: string;
   email: string;
   username: string;
   password: string;

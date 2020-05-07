@@ -5,12 +5,7 @@ import { AuthenticationService } from '@shared/services/authentication.service';
   selector: 'app-user-panel',
   template: `
     <div class="matero-user-panel" fxLayout="column" fxLayoutAlign="center center">
-      <img
-        class="matero-user-panel-avatar"
-        src="assets/images/avatar.jpg"
-        alt="avatar"
-        width="64"
-      />
+      <img class="matero-user-panel-avatar" [src]="photosrc" alt="avatar" width="64" />
       <h4 class="matero-user-panel-name">{{username}}</h4>
       <h5 class="matero-user-panel-email">{{email}}</h5>
       <div class="matero-user-panel-icons">
@@ -39,8 +34,12 @@ export class UserPanelComponent {
     return this.auth.currentUserValue.email;
   }
 
+  public get photosrc() {
+    return this.auth.currentUserValue.photosrc;
+  }
+
   logout() {
-    this.auth.signout();
+    this.auth.disconnect();
   }
 
 }
