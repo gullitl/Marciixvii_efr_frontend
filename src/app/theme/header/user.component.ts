@@ -40,7 +40,8 @@ export class UserComponent {
   }
 
   public get photosrc() {
-    return this.auth.currentUserValue.photosrc;
+    const test = this.auth.currentUserValue.photosrc;
+    return test;
   }
 
   logout() {
