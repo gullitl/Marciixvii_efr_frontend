@@ -12,5 +12,4 @@ export class Utilisateur extends BaseEntity {
   username: string;
   password: string;
   niveauAcces: NiveauAcces;
-  token: string;
 }
