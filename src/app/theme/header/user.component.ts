@@ -10,8 +10,8 @@ import { Component } from '@angular/core';
       href="javascript:void(0)"
       [matMenuTriggerFor]="menu"
     >
-      <img class="matero-avatar" [src]="photosrc" width="32" alt="avatar" />
-      <span class="matero-username" fxHide.lt-sm>{{username}}</span>
+      <img class="matero-avatar" [src]="photosrc()" width="32" alt="avatar" />
+      <span class="matero-username" fxHide.lt-sm>{{username()}}</span>
     </button>
 
     <mat-menu #menu="matMenu">
@@ -32,17 +32,10 @@ import { Component } from '@angular/core';
 })
 export class UserComponent {
 
-  constructor(private auth: AuthenticationService) {
-  }
+  constructor(private auth: AuthenticationService) {}
 
-  public get username(): string {
-    return this.auth.currentUserValue.username;
-  }
-
-  public get photosrc() {
-    const test = this.auth.currentUserValue.photosrc;
-    return test;
-  }
+  username = () => this.auth.currentUserValue.username;
+  photosrc = () => this.auth.currentUserValue.photosrc;
 
   logout() {
     this.auth.disconnect();

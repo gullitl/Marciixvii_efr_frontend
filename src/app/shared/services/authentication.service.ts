@@ -39,8 +39,7 @@ export class AuthenticationService {
       email: 'plam.l@live.fr',
       username,
       password,
-      niveauAcces: NiveauAcces.Administrateur,
-      token: 'fghjjbfkjsbjkbkjabvsbakjb578628489jbkjd'
+      niveauAcces: NiveauAcces.Administrateur
     };
 
     this.session.set('currentUser', utilisateur);

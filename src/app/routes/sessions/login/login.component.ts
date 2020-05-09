@@ -1,4 +1,3 @@
-import { Utilisateur } from './../../../shared/models/entities/utilisateur.entity';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.auth.currentUser.subscribe(utilz => {
-      if (utilz && utilz.token) {
+      if (this.auth.currentUserValue.username !== undefined) {
         this.router.navigateByUrl('/dashboard');
       }
     });
