@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
         niveauAcces: NiveauAcces.Administrateur
       };
 
-      this.service.createUtilisateur(utilisateur)
+      this.service.create(utilisateur)
       .subscribe(p => {
         test = p;
         console.log(test);

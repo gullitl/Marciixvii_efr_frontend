@@ -30,7 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.authenticate(this.authForm.value.username, this.authForm.value.password);
+    if(this.authForm.valid) {
+      this.auth.authenticate(this.authForm.value.username, this.authForm.value.password);
+    }
   }
 
 }

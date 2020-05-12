@@ -10,10 +10,10 @@ export class UtilisateurRestUrl {
 
   #infixUrl = (postfixUrl: string): string => this.baseUrl.monteUrl('utilisateur/' + postfixUrl);
 
-  getAllUtilisateurs = () => this.#infixUrl('getallutilisateurs');
-  getUtilisateurById = (id: number) => this.#infixUrl('getutilisateurbyid/' + id);
-  createUtilisateur = () => this.#infixUrl('createutilisateur');
-  updateUtilisateur = () => this.#infixUrl('updateutilisateur');
-  deleteUtilisateurById = (id: number) => this.#infixUrl('deleteutilisateurbyid/' + id);
+  getAll = () => this.#infixUrl('getall');
+  getById = (id: number) => this.#infixUrl('getbyid/' + id);
+  create = () => this.#infixUrl('create');
+  update = () => this.#infixUrl('update');
+  deleteById = (id: number) => this.#infixUrl('deletebyid/' + id);
   login = (username: string, password: string) => this.#infixUrl('login/' + username + '/' + password);
 }
