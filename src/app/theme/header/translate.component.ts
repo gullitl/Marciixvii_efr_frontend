@@ -25,17 +25,16 @@ import { SettingsService } from '@core';
 })
 export class TranslateComponent {
   langs = {
-    'en-US': 'English',
-    'zh-CN': '中文简体',
-    'zh-TW': '中文繁体',
+    'fr-FR': 'Français',
+    'en-US': 'English'
   };
 
   constructor(public translate: TranslateService, private settings: SettingsService) {
-    translate.addLangs(['en-US', 'zh-CN', 'zh-TW']);
-    translate.setDefaultLang('en-US');
+    translate.addLangs(['fr-FR', 'en-US']);
+    translate.setDefaultLang('fr-FR');
 
     const browserLang = navigator.language;
-    translate.use(browserLang.match(/en-US|zh-CN|zh-TW/) ? browserLang : 'en-US');
+    translate.use(browserLang.match(/fr-FR|en-US/) ? browserLang : 'fr-FR');
   }
 
   useLanguage(language: string) {

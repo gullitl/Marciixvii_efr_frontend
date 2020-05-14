@@ -20,9 +20,9 @@ const routes: Routes = [
         data: { title: 'Dashboard', titleI18n: 'dashboard' },
       },
       {
-        path: 'design',
-        loadChildren: () => import('./design/design.module').then(m => m.DesignModule),
-        data: { title: 'Design', titleI18n: 'design' },
+        path: 'registre',
+        loadChildren: () => import('./registre/registre.module').then(m => m.RegistreModule),
+        data: { title: 'Registre', titleI18n: 'registre' },
       },
       {
         path: 'material',

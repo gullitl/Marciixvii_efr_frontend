@@ -11,19 +11,19 @@
       }
     },
     {
-      "route": "design",
-      "name": "design",
+      "route": "registre",
+      "name": "registre",
       "type": "sub",
-      "icon": "color_lens",
+      "icon": "save",
       "children": [
         {
           "route": "colors",
-          "name": "colors",
+          "name": "medicaments",
           "type": "link"
         },
         {
           "route": "icons",
-          "name": "icons",
+          "name": "materiels",
           "type": "link"
         }
       ]

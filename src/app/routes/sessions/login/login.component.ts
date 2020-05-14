@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@shared/services/authentication.service';
+import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +23,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.currentUser.subscribe(utilz => {
+    try {
       if (this.auth.currentUserValue.username !== undefined) {
         this.router.navigateByUrl('/dashboard');
       }
-    });
+    } catch (error) {
+
+    }
+
   }
 
   login() {

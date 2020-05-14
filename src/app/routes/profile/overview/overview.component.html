@@ -1,115 +1,191 @@
 <mat-card>
-  <mat-tab-group class="m--16">
-    <mat-tab label="First">
-      <div class="m-16">
-        <img class="d-block w-full" src="assets/images/pixabay/2.jpg" alt="">
-        <h3>Aenean viverra arcu nec pellentesque ultrices. In erat purus, adipiscing nec lacinia at,
-          ornare ac eros.
-        </h3>
-        <p>
-          Nullam at risus metus. Quisque nisl purus, pulvinar ut mauris vel, elementum suscipit
-          eros. Praesent
-          ornare ante massa, egestas pellentesque orci convallis ut. Curabitur consequat convallis
-          est, id luctus
-          mauris lacinia vel. Nullam tristique lobortis mauris, ultricies fermentum lacus bibendum
-          id. Proin non
-          ante tortor. Suspendisse pulvinar ornare tellus nec pulvinar. Nam pellentesque accumsan
-          mi, non
-          pellentesque sem convallis sed. Quisque rutrum erat id auctor gravida.</p>
-        <p>
-          Nullam at risus metus. Quisque nisl purus, pulvinar ut mauris vel, elementum suscipit
-          eros. Praesent
-          ornare ante massa, egestas pellentesque orci convallis ut. Curabitur consequat convallis
-          est, id luctus
-          mauris lacinia vel. Nullam tristique lobortis mauris, ultricies fermentum lacus bibendum
-          id. Proin non
-          ante tortor. Suspendisse pulvinar ornare tellus nec pulvinar. Nam pellentesque accumsan
-          mi, non
-          pellentesque sem convallis sed. Quisque rutrum erat id auctor gravida.</p>
-        <p>
-          Nullam at risus metus. Quisque nisl purus, pulvinar ut mauris vel, elementum suscipit
-          eros. Praesent
-          ornare ante massa, egestas pellentesque orci convallis ut. Curabitur consequat convallis
-          est, id luctus
-          mauris lacinia vel. Nullam tristique lobortis mauris, ultricies fermentum lacus bibendum
-          id. Proin non
-          ante tortor. Suspendisse pulvinar ornare tellus nec pulvinar. Nam pellentesque accumsan
-          mi, non
-          pellentesque sem convallis sed. Quisque rutrum erat id auctor gravida.</p>
-      </div>
-    </mat-tab>
-    <mat-tab label="Second">
-      <div class="m-16">
-        <img class="d-block w-full" src="assets/images/pixabay/8.jpg" alt="">
-        <h3>Vestibulum vitae diam nec odio dapibus placerat. Ut ut lorem justo.</h3>
-        <p>
-          Fusce bibendum augue nec fermentum tempus. Sed laoreet dictum tempus. Aenean ac sem quis
-          nulla malesuada
-          volutpat. Nunc vitae urna pulvinar velit commodo cursus. Nullam eu felis quis diam
-          adipiscing hendrerit
-          vel ac turpis. Nam mattis fringilla euismod. Donec eu ipsum sit amet mauris iaculis
-          aliquet. Quisque sit
-          amet feugiat odio. Cras convallis lorem at libero lobortis, placerat lobortis sapien
-          lacinia. Duis sit
-          amet elit bibendum sapien dignissim bibendum.</p>
-        <p>
-          Fusce bibendum augue nec fermentum tempus. Sed laoreet dictum tempus. Aenean ac sem quis
-          nulla malesuada
-          volutpat. Nunc vitae urna pulvinar velit commodo cursus. Nullam eu felis quis diam
-          adipiscing hendrerit
-          vel ac turpis. Nam mattis fringilla euismod. Donec eu ipsum sit amet mauris iaculis
-          aliquet. Quisque sit
-          amet feugiat odio. Cras convallis lorem at libero lobortis, placerat lobortis sapien
-          lacinia. Duis sit
-          amet elit bibendum sapien dignissim bibendum.</p>
-        <p>
-          Fusce bibendum augue nec fermentum tempus. Sed laoreet dictum tempus. Aenean ac sem quis
-          nulla malesuada
-          volutpat. Nunc vitae urna pulvinar velit commodo cursus. Nullam eu felis quis diam
-          adipiscing hendrerit
-          vel ac turpis. Nam mattis fringilla euismod. Donec eu ipsum sit amet mauris iaculis
-          aliquet. Quisque sit
-          amet feugiat odio. Cras convallis lorem at libero lobortis, placerat lobortis sapien
-          lacinia. Duis sit
-          amet elit bibendum sapien dignissim bibendum.</p>
+  <mat-card-title>Edit Profile</mat-card-title>
+  <mat-card-content>
+    <mat-tab-group class="m--16">
+      <mat-tab label="Identity">
+        <div class="m-16">
+          <form [formGroup]="reactiveForm" class="form-field-full">
+            <div fxLayout="row wrap" fxLayoutGap="4px grid">
+              <input type="hidden" formControlName="id">
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nom</mat-label>
+                  <input matInput placeholder="Simple placeholder" formControlName="nom" required>
+                  <mat-error *ngIf="reactiveForm.get('nom').invalid">Please enter Nom</mat-error>
+                </mat-form-field>
+              </div>
 
-      </div>
-    </mat-tab>
-    <mat-tab label="Third">
-      <div class="m-16">
-        <img class="d-block w-full" src="assets/images/pixabay/16.jpg" alt="">
-        <h3>Maecenas eget turpis luctus, scelerisque arcu id, iaculis urna. Interdum et malesuada
-          fames ac ante
-          ipsum primis in faucibus.</h3>
-        <p>
-          Morbi placerat est nec pharetra placerat. Ut laoreet nunc accumsan orci aliquam accumsan.
-          Maecenas
-          volutpat dolor vitae sapien ultricies fringilla. Suspendisse vitae orci sed nibh ultrices
-          tristique.
-          Aenean in ante eget urna semper imperdiet. Pellentesque sagittis a nulla at scelerisque.
-          Nam augue nulla,
-          accumsan quis nisi a, facilisis eleifend nulla. Praesent aliquet odio non imperdiet
-          fringilla.</p>
-        <p>
-          Morbi placerat est nec pharetra placerat. Ut laoreet nunc accumsan orci aliquam accumsan.
-          Maecenas
-          volutpat dolor vitae sapien ultricies fringilla. Suspendisse vitae orci sed nibh ultrices
-          tristique.
-          Aenean in ante eget urna semper imperdiet. Pellentesque sagittis a nulla at scelerisque.
-          Nam augue nulla,
-          accumsan quis nisi a, facilisis eleifend nulla. Praesent aliquet odio non imperdiet
-          fringilla.</p>
-        <p>
-          Morbi placerat est nec pharetra placerat. Ut laoreet nunc accumsan orci aliquam accumsan.
-          Maecenas
-          volutpat dolor vitae sapien ultricies fringilla. Suspendisse vitae orci sed nibh ultrices
-          tristique.
-          Aenean in ante eget urna semper imperdiet. Pellentesque sagittis a nulla at scelerisque.
-          Nam augue nulla,
-          accumsan quis nisi a, facilisis eleifend nulla. Praesent aliquet odio non imperdiet
-          fringilla.</p>
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Postnom</mat-label>
+                  <input matInput placeholder="Simple placeholder" formControlName="postnom" required>
+                  <mat-error *ngIf="reactiveForm.get('postnom').invalid">Please enter Postnom</mat-error>
+                </mat-form-field>
+              </div>
 
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Prenom</mat-label>
+                  <input matInput placeholder="Simple placeholder" formControlName="prenom" required>
+                  <mat-error *ngIf="reactiveForm.get('prenom').invalid">Please enter Prenom</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-radio-group formControlName="sexe" >
+                  <mat-radio-button value="1">Masculin</mat-radio-button>
+                  <mat-radio-button value="2">Feminin</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>E-mail</mat-label>
+                  <input matInput placeholder="Simple placeholder" formControlName="email" required>
+                  <mat-error *ngIf="reactiveForm.get('email').invalid">
+                    {{getErrorMessage(reactiveForm)}}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Username</mat-label>
+                  <input matInput placeholder="Simple placeholder" formControlName="username" required>
+                  <mat-error *ngIf="reactiveForm.get('username').invalid">Please enter Username</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Enter your password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Mobile</mat-label>
+                  <input matInput placeholder="Simple placeholder" type="number" formControlName="mobile"
+                         required>
+                  <mat-icon matSuffix>smartphone</mat-icon>
+                  <mat-error *ngIf="reactiveForm.get('mobile').invalid">Please enter mobile</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Tele</mat-label>
+                  <input matInput placeholder="Simple placeholder" type="number" formControlName="tele"
+                         required>
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-error *ngIf="reactiveForm.get('tele').invalid">Please enter tele</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <mat-label>Website</mat-label>
+                  <input matInput placeholder="Simple placeholder" formControlName="website" required>
+                  <mat-error *ngIf="reactiveForm.get('website').invalid">Please enter website</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="50" fxFlex.lt-md="100">
+                <mat-form-field appearance="outline">
+                  <input matInput [matDatepicker]="picker2" placeholder="Choose a date"
+                         formControlName="date">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-error *ngIf="reactiveForm.get('date').invalid">Please enter website</mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="end center">
+              <button mat-raised-button color="primary" class="m-l-8">Sauvegarder</button>
+            <button mat-raised-button color="accent" class="m-l-8">Annuler</button>
+            </div>
+
+          </form>
+        </div>
+      </mat-tab>
+      <mat-tab label="Adress">
+        <div class="m-16">
+          <img class="d-block w-full" src="assets/images/pixabay/8.jpg" alt="">
+          <h3>Vestibulum vitae diam nec odio dapibus placerat. Ut ut lorem justo.</h3>
+          <p>
+            Fusce bibendum augue nec fermentum tempus. Sed laoreet dictum tempus. Aenean ac sem quis
+            nulla malesuada
+            volutpat. Nunc vitae urna pulvinar velit commodo cursus. Nullam eu felis quis diam
+            adipiscing hendrerit
+            vel ac turpis. Nam mattis fringilla euismod. Donec eu ipsum sit amet mauris iaculis
+            aliquet. Quisque sit
+            amet feugiat odio. Cras convallis lorem at libero lobortis, placerat lobortis sapien
+            lacinia. Duis sit
+            amet elit bibendum sapien dignissim bibendum.</p>
+          <p>
+            Fusce bibendum augue nec fermentum tempus. Sed laoreet dictum tempus. Aenean ac sem quis
+            nulla malesuada
+            volutpat. Nunc vitae urna pulvinar velit commodo cursus. Nullam eu felis quis diam
+            adipiscing hendrerit
+            vel ac turpis. Nam mattis fringilla euismod. Donec eu ipsum sit amet mauris iaculis
+            aliquet. Quisque sit
+            amet feugiat odio. Cras convallis lorem at libero lobortis, placerat lobortis sapien
+            lacinia. Duis sit
+            amet elit bibendum sapien dignissim bibendum.</p>
+          <p>
+            Fusce bibendum augue nec fermentum tempus. Sed laoreet dictum tempus. Aenean ac sem quis
+            nulla malesuada
+            volutpat. Nunc vitae urna pulvinar velit commodo cursus. Nullam eu felis quis diam
+            adipiscing hendrerit
+            vel ac turpis. Nam mattis fringilla euismod. Donec eu ipsum sit amet mauris iaculis
+            aliquet. Quisque sit
+            amet feugiat odio. Cras convallis lorem at libero lobortis, placerat lobortis sapien
+            lacinia. Duis sit
+            amet elit bibendum sapien dignissim bibendum.</p>
+
+        </div>
+      </mat-tab>
+      <mat-tab label="Extra info">
+        <div class="m-16">
+          <img class="d-block w-full" src="assets/images/pixabay/16.jpg" alt="">
+          <h3>Maecenas eget turpis luctus, scelerisque arcu id, iaculis urna. Interdum et malesuada
+            fames ac ante
+            ipsum primis in faucibus.</h3>
+          <p>
+            Morbi placerat est nec pharetra placerat. Ut laoreet nunc accumsan orci aliquam accumsan.
+            Maecenas
+            volutpat dolor vitae sapien ultricies fringilla. Suspendisse vitae orci sed nibh ultrices
+            tristique.
+            Aenean in ante eget urna semper imperdiet. Pellentesque sagittis a nulla at scelerisque.
+            Nam augue nulla,
+            accumsan quis nisi a, facilisis eleifend nulla. Praesent aliquet odio non imperdiet
+            fringilla.</p>
+          <p>
+            Morbi placerat est nec pharetra placerat. Ut laoreet nunc accumsan orci aliquam accumsan.
+            Maecenas
+            volutpat dolor vitae sapien ultricies fringilla. Suspendisse vitae orci sed nibh ultrices
+            tristique.
+            Aenean in ante eget urna semper imperdiet. Pellentesque sagittis a nulla at scelerisque.
+            Nam augue nulla,
+            accumsan quis nisi a, facilisis eleifend nulla. Praesent aliquet odio non imperdiet
+            fringilla.</p>
+          <p>
+            Morbi placerat est nec pharetra placerat. Ut laoreet nunc accumsan orci aliquam accumsan.
+            Maecenas
+            volutpat dolor vitae sapien ultricies fringilla. Suspendisse vitae orci sed nibh ultrices
+            tristique.
+            Aenean in ante eget urna semper imperdiet. Pellentesque sagittis a nulla at scelerisque.
+            Nam augue nulla,
+            accumsan quis nisi a, facilisis eleifend nulla. Praesent aliquet odio non imperdiet
+            fringilla.</p>
+
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
 </mat-card>

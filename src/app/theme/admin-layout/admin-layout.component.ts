@@ -18,7 +18,6 @@ import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 
 import { SettingsService, AppSettings } from '@core';
 import { AppDirectionality } from '@shared';
-import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
 import { AuthenticationService } from '@shared/services/authentication.service';
 
 const MOBILE_MEDIAQUERY = 'screen and (max-width: 599px)';
@@ -94,7 +93,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     setTimeout(() => (this.contentWidthFix = this.collapsedWidthFix = false));
-    if (this.auth.currentUserValue.username === undefined) {
+    if (this.auth.currentUserValue === null || this.auth.currentUserValue.username === undefined) {
       this.router.navigateByUrl('/auth/login');
     }
   }

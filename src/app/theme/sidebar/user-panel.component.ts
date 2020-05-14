@@ -12,9 +12,6 @@ import { AuthenticationService } from '@shared/services/authentication.service';
         <a routerLink="/profile/overview" mat-icon-button>
           <mat-icon>account_circle</mat-icon>
         </a>
-        <a routerLink="/profile/settings" mat-icon-button>
-          <mat-icon>settings</mat-icon>
-        </a>
         <a routerLink="/auth/login" mat-icon-button (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>
         </a>

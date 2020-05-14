@@ -4,7 +4,7 @@
     <mat-card-content>
       <form class="form-field-full" [formGroup]="authForm">
         <mat-form-field appearance="outline">
-          <mat-label>Username</mat-label>
+          <mat-label>Username/e-mail</mat-label>
           <input matInput placeholder="Simple placeholder" formControlName="username" required>
           <mat-error *ngIf="authForm.get('username').invalid">Please enter username</mat-error>
         </mat-form-field>
