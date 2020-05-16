@@ -21,7 +21,7 @@ export class UtilisateurService {
     const test = this.url.create();
     return this.http.post<Utilisateur>(test, body, this.#httpOptions);
   }
-  update = (body: Utilisateur): Observable<Utilisateur> => this.http.put<Utilisateur>(this.url.update(), body, this.#httpOptions);
+  update = (body: Utilisateur): Observable<any> => this.http.put<any>(this.url.update(), body, this.#httpOptions);
   deleteById = (id: number): Observable<Utilisateur> => this.http.delete<Utilisateur>(this.url.deleteById(id), this.#httpOptions);
   login = (username: string, password: string): Observable<Utilisateur> => this.http.get<Utilisateur>(this.url.login(username, password), this.#httpOptions);
 }

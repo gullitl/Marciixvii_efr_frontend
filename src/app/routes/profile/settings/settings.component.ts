@@ -1,30 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Sexe } from '@shared/utils/enums/sexe.enum';
-import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
+import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
 
 @Component({
-  selector: 'app-profile-overview',
-  templateUrl: './overview.component.html',
+  selector: 'app-profile-settings',
+  templateUrl: './settings.component.html',
 })
-export class ProfileOverviewComponent implements OnInit {
+export class ProfileSettingsComponent implements OnInit {
   reactiveForm: FormGroup;
+  hide = true;
 
   constructor(private fb: FormBuilder,
-              private auth: AuthenticationService,
-              private service: UtilisateurService) {
+    private auth: AuthenticationService,
+    private service: UtilisateurService) {
     this.reactiveForm = this.fb.group({
-      nom: ['', [Validators.required]],
-      postnom: ['', [Validators.required]],
-      prenom: ['', [Validators.required]],
-      sexe: [this.auth.currentUserValue.sexe === Sexe.Masculin ? '1' : '2'],
-      photosrc: [''],
-      email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required]]
+      currentPassword: ['', Validators.required],
+      newPassword: ['', this.newPasswordValidator],
+      confirmNewPassword: ['', [this.confirmValidator]]
     });
   }
+
+  confirmValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { error: true, required: true };
+    } else if (control.value !== this.reactiveForm.controls.newPassword.value) {
+      return { error: true, confirm: true };
+    }
+    return {};
+  };
+
+  newPasswordValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { error: true, required: true };
+    } else if (control.value === this.reactiveForm.controls.currentPassword.value) {
+      return { error: true, confirm: true };
+    }
+    return {};
+  };
 
   ngOnInit() {}
 
