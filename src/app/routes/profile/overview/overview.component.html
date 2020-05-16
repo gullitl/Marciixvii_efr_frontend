@@ -28,10 +28,11 @@
         </div>
 
         <div fxFlex="50" fxFlex.lt-md="100">
-          <mat-radio-group formControlName="sexe" >
-            <mat-radio-button value="1">Masculin</mat-radio-button>
-            <mat-radio-button value="2">Feminin</mat-radio-button>
-          </mat-radio-group>
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Simple placeholder" formControlName="username" required>
+            <mat-error *ngIf="reactiveForm.get('username').invalid">Please enter Username</mat-error>
+          </mat-form-field>
         </div>
 
         <div fxFlex="50" fxFlex.lt-md="100">
@@ -44,11 +45,10 @@
         </div>
 
         <div fxFlex="50" fxFlex.lt-md="100">
-          <mat-form-field appearance="outline">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Simple placeholder" formControlName="username" required>
-            <mat-error *ngIf="reactiveForm.get('username').invalid">Please enter Username</mat-error>
-          </mat-form-field>
+          <mat-radio-group formControlName="sexe" >
+            <mat-radio-button value="1">Masculin</mat-radio-button>
+            <mat-radio-button value="2">Feminin</mat-radio-button>
+          </mat-radio-group>
         </div>
       </div>
 

@@ -16,13 +16,12 @@ export class ProfileOverviewComponent implements OnInit {
               private auth: AuthenticationService,
               private service: UtilisateurService) {
     this.reactiveForm = this.fb.group({
-      nom: ['', [Validators.required]],
-      postnom: ['', [Validators.required]],
-      prenom: ['', [Validators.required]],
+      nom: [this.auth.currentUserValue.nom, [Validators.required]],
+      postnom: [this.auth.currentUserValue.postnom, [Validators.required]],
+      prenom: [this.auth.currentUserValue.prenom, [Validators.required]],
       sexe: [this.auth.currentUserValue.sexe === Sexe.Masculin ? '1' : '2'],
-      photosrc: [''],
-      email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required]]
+      email: [this.auth.currentUserValue.email, [Validators.required, Validators.email]],
+      username: [this.auth.currentUserValue.username, [Validators.required]]
     });
   }
 
@@ -35,10 +34,10 @@ export class ProfileOverviewComponent implements OnInit {
         postnom: this.reactiveForm.value.postnom,
         prenom: this.reactiveForm.value.prenom,
         sexe: this.reactiveForm.value.sexe,
-        photosrc: '',
         email: this.reactiveForm.value.email,
         username: this.reactiveForm.value.username,
         id: this.auth.currentUserValue.id,
+        photosrc: '',
         password: this.auth.currentUserValue.password,
         niveauAcces: this.auth.currentUserValue.niveauAcces
       };
