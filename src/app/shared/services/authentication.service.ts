@@ -26,7 +26,7 @@ export class AuthenticationService {
   }
 
   public authenticate(username: string, password: string) {
-    this.service.login(username, password)
+    this.service.login({username, password})
     .subscribe(u => {
       this.session.set('currentUser', u);
       this.currentUserSubject.next(u);

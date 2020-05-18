@@ -37,7 +37,7 @@ export class ProfileOverviewComponent implements OnInit {
         email: this.reactiveForm.value.email,
         username: this.reactiveForm.value.username,
         id: this.auth.currentUserValue.id,
-        photosrc: '',
+        photosrc: this.auth.currentUserValue.photosrc,
         password: this.auth.currentUserValue.password,
         niveauAcces: this.auth.currentUserValue.niveauAcces
       };

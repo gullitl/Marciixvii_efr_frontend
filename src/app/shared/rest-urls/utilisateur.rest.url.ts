@@ -15,5 +15,5 @@ export class UtilisateurRestUrl {
   create = () => this.#infixUrl('create');
   update = () => this.#infixUrl('update');
   deleteById = (id: number) => this.#infixUrl('deletebyid?id=' + id);
-  login = (username: string, password: string) => this.#infixUrl('login?username=' + username + '&password=' + password);
+  login = () => this.#infixUrl('login');
 }
