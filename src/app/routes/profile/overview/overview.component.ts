@@ -11,6 +11,7 @@ import { UtilisateurService } from '@shared/services/domain/utilisateur.service'
 })
 export class ProfileOverviewComponent implements OnInit {
   reactiveForm: FormGroup;
+  sexeList: string[] = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
 
   constructor(private fb: FormBuilder,
               private auth: AuthenticationService,
@@ -19,7 +20,7 @@ export class ProfileOverviewComponent implements OnInit {
       nom: [this.auth.currentUserValue.nom, [Validators.required]],
       postnom: [this.auth.currentUserValue.postnom, [Validators.required]],
       prenom: [this.auth.currentUserValue.prenom, [Validators.required]],
-      sexe: [this.auth.currentUserValue.sexe === Sexe.Masculin ? '1' : '2'],
+      sexe: [this.auth.currentUserValue.sexe === Sexe.Masculin ? this.sexeList[0] : this.sexeList[1]],
       email: [this.auth.currentUserValue.email, [Validators.required, Validators.email]],
       username: [this.auth.currentUserValue.username, [Validators.required]]
     });
@@ -58,7 +59,6 @@ export class ProfileOverviewComponent implements OnInit {
   }
 
   initializeFormGroup() {
-    const keys = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
     this.reactiveForm.setValue({
       nom: this.auth.currentUserValue.nom,
       postnom: this.auth.currentUserValue.postnom,
@@ -79,11 +79,21 @@ export class ProfileOverviewComponent implements OnInit {
 
   isFromInvalid = (): boolean => this.reactiveForm.invalid ? true : this.isTheSame() ?? false;
 
-  isTheSame = (): boolean => this.reactiveForm.value.nom === this.auth.currentUserValue.nom &&
+  isTheSame = (): boolean => {
+    let isSexeValueSame: boolean;
+
+    Object.entries(Sexe).filter(([key, value]) => {
+      if(value === this.reactiveForm.value.sexe) {
+        return isSexeValueSame = Number(key) === this.auth.currentUserValue.sexe;
+      }
+    });
+
+    return this.reactiveForm.value.nom === this.auth.currentUserValue.nom &&
                             this.reactiveForm.value.postnom === this.auth.currentUserValue.postnom &&
                             this.reactiveForm.value.prenom === this.auth.currentUserValue.prenom &&
                             this.reactiveForm.value.username === this.auth.currentUserValue.username &&
                             this.reactiveForm.value.email === this.auth.currentUserValue.email &&
-                            Number(this.reactiveForm.value.sexe) === this.auth.currentUserValue.sexe;
+                            isSexeValueSame;
+  }
 
 }
