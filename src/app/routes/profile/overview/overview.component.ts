@@ -58,6 +58,7 @@ export class ProfileOverviewComponent implements OnInit {
   }
 
   initializeFormGroup() {
+    const keys = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
     this.reactiveForm.setValue({
       nom: this.auth.currentUserValue.nom,
       postnom: this.auth.currentUserValue.postnom,
@@ -76,15 +77,13 @@ export class ProfileOverviewComponent implements OnInit {
       : '';
   }
 
-  isTheSame = (): boolean => {
-    const reactiveFormValueSexe = this.reactiveForm.value.sexe === Sexe.Masculin ? '1' : '2';
-    const currentUserValueSexe = this.auth.currentUserValue.sexe === Sexe.Masculin ? '1' : '2';
-    return this.reactiveForm.value.nom === this.auth.currentUserValue.nom &&
+  isFromInvalid = (): boolean => this.reactiveForm.invalid ? true : this.isTheSame() ?? false;
+
+  isTheSame = (): boolean => this.reactiveForm.value.nom === this.auth.currentUserValue.nom &&
                             this.reactiveForm.value.postnom === this.auth.currentUserValue.postnom &&
                             this.reactiveForm.value.prenom === this.auth.currentUserValue.prenom &&
                             this.reactiveForm.value.username === this.auth.currentUserValue.username &&
                             this.reactiveForm.value.email === this.auth.currentUserValue.email &&
-                            reactiveFormValueSexe === currentUserValueSexe;
-  }
+                            Number(this.reactiveForm.value.sexe) === this.auth.currentUserValue.sexe;
 
 }
