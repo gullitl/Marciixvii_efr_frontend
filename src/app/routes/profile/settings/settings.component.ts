@@ -93,4 +93,9 @@ export class ProfileSettingsComponent implements OnInit {
       ? 'Not a valid email'
       : '';
   }
+
+  isTheSame = (): boolean => this.reactiveForm.value.currentPassword === '' ||
+                            this.reactiveForm.value.newPassword === '' ||
+                            this.reactiveForm.value.confirmNewPassword === '';
+
 }
