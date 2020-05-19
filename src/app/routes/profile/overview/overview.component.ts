@@ -59,14 +59,12 @@ export class ProfileOverviewComponent implements OnInit {
 
   initializeFormGroup() {
     this.reactiveForm.setValue({
-      id: 0,
-      nom: '',
-      postnom: '',
-      prenom: '',
-      sexe: Sexe.Masculin,
-      photosrc: '',
-      email: '',
-      username: '',
+      nom: this.auth.currentUserValue.nom,
+      postnom: this.auth.currentUserValue.postnom,
+      prenom: this.auth.currentUserValue.prenom,
+      sexe: this.auth.currentUserValue.sexe === Sexe.Masculin ? '1' : '2',
+      email: this.auth.currentUserValue.email,
+      username: this.auth.currentUserValue.username
     });
   }
 
@@ -77,4 +75,16 @@ export class ProfileOverviewComponent implements OnInit {
       ? 'Not a valid email'
       : '';
   }
+
+  isTheSame = (): boolean => {
+    const reactiveFormValueSexe = this.reactiveForm.value.sexe === Sexe.Masculin ? '1' : '2';
+    const currentUserValueSexe = this.auth.currentUserValue.sexe === Sexe.Masculin ? '1' : '2';
+    return this.reactiveForm.value.nom === this.auth.currentUserValue.nom &&
+                            this.reactiveForm.value.postnom === this.auth.currentUserValue.postnom &&
+                            this.reactiveForm.value.prenom === this.auth.currentUserValue.prenom &&
+                            this.reactiveForm.value.username === this.auth.currentUserValue.username &&
+                            this.reactiveForm.value.email === this.auth.currentUserValue.email &&
+                            reactiveFormValueSexe === currentUserValueSexe;
+  }
+
 }
