@@ -29,23 +29,43 @@ export class ProfileOverviewComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit = () => {
+
+    let sexeValue: number;
+
+    Object.entries(Sexe).filter(([key, value]) => {
+      if(value === this.reactiveForm.value.sexe) {
+        return sexeValue = Number(key);
+      }
+    });
+
     if (this.reactiveForm.valid) {
-      const utilisateur: Utilisateur = {
+      const profil = {
         nom: this.reactiveForm.value.nom,
         postnom: this.reactiveForm.value.postnom,
         prenom: this.reactiveForm.value.prenom,
-        sexe: this.reactiveForm.value.sexe,
+        sexe: sexeValue,
         email: this.reactiveForm.value.email,
         username: this.reactiveForm.value.username,
-        id: this.auth.currentUserValue.id,
-        photosrc: this.auth.currentUserValue.photosrc,
-        password: this.auth.currentUserValue.password,
-        niveauAcces: this.auth.currentUserValue.niveauAcces
+        id: this.auth.currentUserValue.id
       };
-
-      this.service.update(utilisateur).subscribe(p => {
+      this.service.changeProfil(profil).subscribe(p => {
+        const u: Utilisateur = {
+          nom: profil.nom,
+          postnom: profil.postnom,
+          prenom: profil.prenom,
+          sexe: profil.sexe,
+          email: profil.email,
+          username: profil.username,
+          id: profil.id,
+          photosrc: this.auth.currentUserValue.photosrc,
+          password: this.auth.currentUserValue.password,
+          niveauAcces: this.auth.currentUserValue.niveauAcces
+        };
+        this.auth.userSession = u;
         this.onClear();
+        location.reload();
         // this.notificationService.sucess(':: Submitted successfully');
+
       }, error => {
         console.log('Oops', error);
         // this.notificationService.sucess('::: Error: '.concat(error));
@@ -63,7 +83,7 @@ export class ProfileOverviewComponent implements OnInit {
       nom: this.auth.currentUserValue.nom,
       postnom: this.auth.currentUserValue.postnom,
       prenom: this.auth.currentUserValue.prenom,
-      sexe: this.auth.currentUserValue.sexe === Sexe.Masculin ? '1' : '2',
+      sexe: this.auth.currentUserValue.sexe === Sexe.Masculin ? this.sexeList[0] : this.sexeList[1],
       email: this.auth.currentUserValue.email,
       username: this.auth.currentUserValue.username
     });
@@ -89,11 +109,11 @@ export class ProfileOverviewComponent implements OnInit {
     });
 
     return this.reactiveForm.value.nom === this.auth.currentUserValue.nom &&
-                            this.reactiveForm.value.postnom === this.auth.currentUserValue.postnom &&
-                            this.reactiveForm.value.prenom === this.auth.currentUserValue.prenom &&
-                            this.reactiveForm.value.username === this.auth.currentUserValue.username &&
-                            this.reactiveForm.value.email === this.auth.currentUserValue.email &&
-                            isSexeValueSame;
+            this.reactiveForm.value.postnom === this.auth.currentUserValue.postnom &&
+            this.reactiveForm.value.prenom === this.auth.currentUserValue.prenom &&
+            this.reactiveForm.value.username === this.auth.currentUserValue.username &&
+            this.reactiveForm.value.email === this.auth.currentUserValue.email &&
+            isSexeValueSame;
   }
 
 }

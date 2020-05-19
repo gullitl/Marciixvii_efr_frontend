@@ -11,25 +11,28 @@ import { UtilisateurService } from './domain/utilisateur.service';
 })
 export class AuthenticationService {
 
-  private currentUserSubject: BehaviorSubject<Utilisateur>;
-  public currentUser: Observable<Utilisateur>;
-
-  public authForm: FormGroup;
+  #currentUserSubject: BehaviorSubject<Utilisateur>;
+  currentUser: Observable<Utilisateur>;
+  authForm: FormGroup;
 
   constructor(private router: Router, private session: SessionStorageService, private service: UtilisateurService) {
-    this.currentUserSubject = new BehaviorSubject<Utilisateur>(this.session.get('currentUser'));
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.#currentUserSubject = new BehaviorSubject<Utilisateur>(this.session.get('currentUser'));
+    this.currentUser = this.#currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): Utilisateur {
-    return this.currentUserSubject.value;
+  get currentUserValue(): Utilisateur {
+    return this.#currentUserSubject.value;
+  }
+
+  set userSession(u: Utilisateur) {
+    this.session.set('currentUser', u);
+    this.#currentUserSubject.next(u);
   }
 
   public authenticate(username: string, password: string) {
     this.service.login({username, password})
     .subscribe(u => {
-      this.session.set('currentUser', u);
-      this.currentUserSubject.next(u);
+      this.userSession = u;
       this.router.navigateByUrl('/dashboard');
       // this.notificationService.sucess(':: Submitted successfully');
     }, error => {
@@ -41,7 +44,7 @@ export class AuthenticationService {
   disconnect() {
     // remove user from local storage to log user out
     this.session.remove('currentUser');
-    this.currentUserSubject.next(null);
+    this.#currentUserSubject.next(null);
     this.router.navigateByUrl('/auth/login');
   }
 
