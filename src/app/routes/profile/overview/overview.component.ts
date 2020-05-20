@@ -29,16 +29,15 @@ export class ProfileOverviewComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit = () => {
-
-    let sexeValue: number;
-
-    Object.entries(Sexe).filter(([key, value]) => {
-      if(value === this.reactiveForm.value.sexe) {
-        return sexeValue = Number(key);
-      }
-    });
-
     if (this.reactiveForm.valid) {
+      let sexeValue: number;
+
+      Object.entries(Sexe).filter(([key, value]) => {
+        if(value === this.reactiveForm.value.sexe) {
+          return sexeValue = Number(key);
+        }
+      });
+
       const profil = {
         nom: this.reactiveForm.value.nom,
         postnom: this.reactiveForm.value.postnom,
