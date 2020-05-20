@@ -10,8 +10,8 @@ import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
 })
 export class LoginComponent implements OnInit {
 
-  public authForm: FormGroup;
-
+  authForm: FormGroup;
+  hide = true;
   constructor(private fb: FormBuilder,
               private auth: AuthenticationService,
               private router: Router) {
