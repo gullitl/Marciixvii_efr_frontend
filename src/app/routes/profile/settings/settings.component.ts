@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Sexe } from '@shared/utils/enums/sexe.enum';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
 import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
+import { NotificationService } from '@shared/services/notification.service';
 
 @Component({
   selector: 'app-profile-settings',
@@ -11,11 +12,14 @@ import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
 })
 export class ProfileSettingsComponent implements OnInit {
   reactiveForm: FormGroup;
-  hide = true;
+  hidecp = true;
+  hidenp = true;
 
   constructor(private fb: FormBuilder,
     private auth: AuthenticationService,
-    private service: UtilisateurService) {
+    private service: UtilisateurService,
+    private notificationService: NotificationService,
+    private renderer: Renderer2) {
     this.reactiveForm = this.fb.group({
       currentPassword: ['', Validators.required],
       newPassword: ['', this.newPasswordValidator],
@@ -43,46 +47,80 @@ export class ProfileSettingsComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit = () => {
-    if (this.reactiveForm.valid) {
-      const utilisateur: Utilisateur = {
-        nom: this.reactiveForm.value.nom,
-        postnom: this.reactiveForm.value.postnom,
-        prenom: this.reactiveForm.value.prenom,
-        sexe: this.reactiveForm.value.sexe,
-        photosrc: '',
-        email: this.reactiveForm.value.email,
-        username: this.reactiveForm.value.username,
-        id: this.auth.currentUserValue.id,
-        password: this.auth.currentUserValue.password,
-        niveauAcces: this.auth.currentUserValue.niveauAcces
-      };
+  private validForm(): boolean {
+    let allright = true;
+    let errMsg: string;
+    let elementById: string;
 
-      this.service.update(utilisateur).subscribe(p => {
+    if (this.reactiveForm.invalid) {
+      errMsg = ':: Same thing went wrong';
+      allright = false;
+    }
+
+    if(this.reactiveForm.value.currentPassword !== this.auth.currentUserValue.password) {
+      errMsg = ':: Current Password is wrong';
+      elementById = 'crtpwd';
+      allright = false;
+    }
+
+    if(this.reactiveForm.value.currentPassword === this.reactiveForm.value.newPassword) {
+      errMsg = ':: Password remains the same';
+      elementById = 'newpwd';
+      allright = false;
+    }
+    if(this.reactiveForm.value.newPassword !== this.reactiveForm.value.confirmNewPassword) {
+      errMsg = ':: Password is inconsistent';
+      elementById = 'cfmpwd';
+      allright = false;
+    }
+
+    if (!allright) {
+      this.notificationService.error(errMsg);
+      if(elementById) {(document.getElementById(elementById) as HTMLInputElement).select();}
+      return false;
+    }
+    return true;
+  }
+
+  onSubmit = () => {
+    if(this.validForm()) {
+      const newPassword = {
+        password: this.reactiveForm.value.newPassword,
+        id: this.auth.currentUserValue.id
+      };
+      this.service.changePassword(newPassword).subscribe(p => {
+        const u: Utilisateur = {
+          nom: this.auth.currentUserValue.nom,
+          postnom: this.auth.currentUserValue.postnom,
+          prenom: this.auth.currentUserValue.prenom,
+          sexe: this.auth.currentUserValue.sexe,
+          email: this.auth.currentUserValue.email,
+          username: this.auth.currentUserValue.username,
+          id: newPassword.id,
+          photosrc: this.auth.currentUserValue.photosrc,
+          password: newPassword.password,
+          niveauAcces: this.auth.currentUserValue.niveauAcces
+        };
+        this.auth.userSession = u;
         this.onClear();
-        // this.notificationService.sucess(':: Submitted successfully');
+        // location.reload();
+        this.notificationService.sucess(':: Submitted successfully');
       }, error => {
-        console.log('Oops', error);
-        // this.notificationService.sucess('::: Error: '.concat(error));
+        this.notificationService.error(error);
       });
     }
   }
 
   onClear() {
     this.reactiveForm.reset();
-    this.initializeFormGroup();
+    // this.initializeFormGroup();
   }
 
   initializeFormGroup() {
     this.reactiveForm.setValue({
-      id: 0,
-      nom: '',
-      postnom: '',
-      prenom: '',
-      sexe: Sexe.Masculin,
-      photosrc: '',
-      email: '',
-      username: '',
+      currentPassword: ' ',
+      newPassword: '  ',
+      confirmNewPassword: '  '
     });
   }
 

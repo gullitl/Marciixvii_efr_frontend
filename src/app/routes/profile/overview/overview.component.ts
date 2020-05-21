@@ -4,6 +4,7 @@ import { Sexe } from '@shared/utils/enums/sexe.enum';
 import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
+import { NotificationService } from '@shared/services/notification.service';
 
 @Component({
   selector: 'app-profile-overview',
@@ -15,7 +16,8 @@ export class ProfileOverviewComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private auth: AuthenticationService,
-              private service: UtilisateurService) {
+              private service: UtilisateurService,
+              private notificationService: NotificationService) {
     this.reactiveForm = this.fb.group({
       nom: [this.auth.currentUserValue.nom, [Validators.required]],
       postnom: [this.auth.currentUserValue.postnom, [Validators.required]],
@@ -63,11 +65,10 @@ export class ProfileOverviewComponent implements OnInit {
         this.auth.userSession = u;
         this.onClear();
         location.reload();
-        // this.notificationService.sucess(':: Submitted successfully');
+        this.notificationService.sucess(':: Submitted successfully');
 
       }, error => {
-        console.log('Oops', error);
-        // this.notificationService.sucess('::: Error: '.concat(error));
+        this.notificationService.error(error);
       });
     }
   }

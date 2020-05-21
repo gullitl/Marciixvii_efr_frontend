@@ -7,9 +7,9 @@
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-form-field appearance="outline">
             <mat-label>Current Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Current Password" type="password" formControlName="currentPassword" required>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <input id="crtpwd" matInput [type]="hidecp ? 'password' : 'text'" placeholder="Current Password" formControlName="currentPassword" required>
+            <button mat-icon-button matSuffix (click)="hidecp = !hidecp" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidecp">
+              <mat-icon>{{hidecp ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             <mat-error *ngIf="reactiveForm.get('currentPassword').invalid">Please enter password</mat-error>
           </mat-form-field>
@@ -19,21 +19,21 @@
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-form-field appearance="outline">
             <mat-label>New Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="New Password" type="password" formControlName="newPassword" required>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <input id="newpwd" matInput [type]="hidenp ? 'password' : 'text'" placeholder="New Password" formControlName="newPassword" required>
+            <button mat-icon-button matSuffix (click)="hidenp = !hidenp" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidenp">
+              <mat-icon>{{hidenp ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             <mat-error *ngIf="reactiveForm.get('newPassword').hasError('required')">Please enter password</mat-error>
-            <mat-error *ngIf="reactiveForm.get('newPassword').hasError('confirm')">Password remains the same!</mat-error>
+            <mat-error *ngIf="reactiveForm.get('newPassword').hasError('confirm')">Password remains the same</mat-error>
           </mat-form-field>
         </div>
 
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-form-field appearance="outline">
             <mat-label>Confirm New Password</mat-label>
-            <input matInput placeholder="Confirm Password" type="password" formControlName="confirmNewPassword" required>
-            <mat-error *ngIf="reactiveForm.get('confirmNewPassword').hasError('required')">Please confirm your password!</mat-error>
-            <mat-error *ngIf="reactiveForm.get('confirmNewPassword').hasError('confirm')">Password is inconsistent!</mat-error>
+            <input id="cfmpwd" matInput placeholder="Confirm Password" type="password" formControlName="confirmNewPassword" required>
+            <mat-error *ngIf="reactiveForm.get('confirmNewPassword').hasError('required')">Please confirm your password</mat-error>
+            <mat-error *ngIf="reactiveForm.get('confirmNewPassword').hasError('confirm')">Password is inconsistent</mat-error>
           </mat-form-field>
         </div>
 

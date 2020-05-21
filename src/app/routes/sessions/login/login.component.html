@@ -11,8 +11,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput placeholder="Simple placeholder" type="password"
-                 formControlName="password" required>
+          <input matInput placeholder="Simple placeholder" type="password" formControlName="password" required>
           <mat-error *ngIf="authForm.get('password').invalid">Please enter password</mat-error>
         </mat-form-field>
 
