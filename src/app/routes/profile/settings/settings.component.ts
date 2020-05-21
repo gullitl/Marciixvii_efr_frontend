@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective } from '@angular/forms';
 import { Sexe } from '@shared/utils/enums/sexe.enum';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
@@ -82,7 +82,7 @@ export class ProfileSettingsComponent implements OnInit {
     return true;
   }
 
-  onSubmit = () => {
+  onSubmit = (formDirective: FormGroupDirective) => {
     if(this.validForm()) {
       const newPassword = {
         password: this.reactiveForm.value.newPassword,
@@ -103,7 +103,7 @@ export class ProfileSettingsComponent implements OnInit {
         };
         this.auth.userSession = u;
         this.onClear();
-        // location.reload();
+        formDirective.resetForm();
         this.notificationService.sucess(':: Submitted successfully');
       }, error => {
         this.notificationService.error(error);
@@ -113,7 +113,7 @@ export class ProfileSettingsComponent implements OnInit {
 
   onClear() {
     this.reactiveForm.reset();
-    // this.initializeFormGroup();
+    this.initializeFormGroup();
   }
 
   initializeFormGroup() {
