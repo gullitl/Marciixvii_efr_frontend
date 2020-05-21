@@ -8,40 +8,19 @@ export class NotificationService {
 
   constructor(public snackbar: MatSnackBar) { }
 
-  #messageDuration = 2000;
+  sucess = (message: string) => this.notificate(message, NotificationAction.Sucess);
+  warning = (message: string) => this.notificate(message, NotificationAction.Warning);
+  error = (message: string) => this.notificate(message, NotificationAction.Error);
 
-  sucess(message: string) {
-    this.snackbar.open('Sucess: ' + message, '', {
-      duration: this.#messageDuration,
-      horizontalPosition: MessageHP.Right,
-      verticalPosition: MessageVP.Top
+  private notificate = (message: string, action: NotificationAction) =>
+    this.snackbar.open(message, action, {
+      duration: 2500
     });
-  }
-
-  error(message: string) {
-    this.snackbar.open('Error: ' + message, '', {
-      duration: this.#messageDuration,
-      horizontalPosition: MessageHP.Right,
-      verticalPosition: MessageVP.Top
-    });
-  }
-
-  warning(message: string) {
-    this.snackbar.open('Warning: ' + message, '', {
-      duration: this.#messageDuration,
-      horizontalPosition: MessageHP.Right,
-      verticalPosition: MessageVP.Top
-    });
-  }
 
 }
 
-enum MessageHP {
-  Right = 'right',
-  Left = 'left',
-}
-
-enum MessageVP {
-  Top = 'top',
-  Bottom = 'bottom',
+enum NotificationAction {
+  Sucess = 'Sucess',
+  Warning = 'Warning',
+  Error = 'Error'
 }
