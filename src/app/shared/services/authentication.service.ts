@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, empty } from 'rxjs';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@shared/services/session-storage.service';
 import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
-import { UtilisateurService } from './domain/utilisateur.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +14,7 @@ export class AuthenticationService {
   currentUser: Observable<Utilisateur>;
   authForm: FormGroup;
 
-  constructor(private router: Router, private session: SessionStorageService, private service: UtilisateurService) {
+  constructor(private router: Router, private session: SessionStorageService) {
     this.#currentUserSubject = new BehaviorSubject<Utilisateur>(this.session.get('currentUser'));
     this.currentUser = this.#currentUserSubject.asObservable();
   }
@@ -27,18 +26,6 @@ export class AuthenticationService {
   set userSession(u: Utilisateur) {
     this.session.set('currentUser', u);
     this.#currentUserSubject.next(u);
-  }
-
-  public authenticate(username: string, password: string) {
-    this.service.login({username, password})
-    .subscribe(u => {
-      this.userSession = u;
-      this.router.navigateByUrl('/dashboard');
-      // this.notificationService.sucess(':: Submitted successfully');
-    }, error => {
-      console.log('Oops', error);
-      // this.notificationService.sucess('::: Error: '.concat(error));
-    });
   }
 
   disconnect() {

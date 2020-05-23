@@ -50,22 +50,28 @@ export class ProfileOverviewComponent implements OnInit {
         id: this.auth.currentUserValue.id
       };
       this.service.changeProfil(profil).subscribe(p => {
-        const u: Utilisateur = {
-          nom: profil.nom,
-          postnom: profil.postnom,
-          prenom: profil.prenom,
-          sexe: profil.sexe,
-          email: profil.email,
-          username: profil.username,
-          id: profil.id,
-          photosrc: this.auth.currentUserValue.photosrc,
-          password: this.auth.currentUserValue.password,
-          niveauAcces: this.auth.currentUserValue.niveauAcces
-        };
-        this.auth.userSession = u;
-        this.onClear();
-        location.reload();
-        this.notificationService.sucess(':: Submitted successfully');
+        if(p){
+          const u: Utilisateur = {
+            nom: profil.nom,
+            postnom: profil.postnom,
+            prenom: profil.prenom,
+            sexe: profil.sexe,
+            email: profil.email,
+            username: profil.username,
+            id: profil.id,
+            photosrc: this.auth.currentUserValue.photosrc,
+            password: this.auth.currentUserValue.password,
+            niveauAcces: this.auth.currentUserValue.niveauAcces
+          };
+          let doReload = false;
+          if(u.username !== this.auth.currentUserValue.username) {
+            doReload = true;
+          }
+          this.auth.userSession = u;
+          this.onClear();
+          if(doReload) { location.reload(); }
+          this.notificationService.sucess(':: Submitted successfully');
+        }
 
       }, error => {
         this.notificationService.error(error);

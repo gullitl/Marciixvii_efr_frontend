@@ -8,14 +8,11 @@ export class NotificationService {
 
   constructor(public snackbar: MatSnackBar) { }
 
-  sucess = (message: string) => this.notificate(message, NotificationAction.Sucess);
-  warning = (message: string) => this.notificate(message, NotificationAction.Warning);
-  error = (message: string) => this.notificate(message, NotificationAction.Error);
+  sucess = (message: string) => this.notify(message, NotificationAction.Sucess);
+  warning = (message: string) => this.notify(message, NotificationAction.Warning);
+  error = (message: string) => this.notify(message, NotificationAction.Error);
 
-  private notificate = (message: string, action: NotificationAction) =>
-    this.snackbar.open(message, action, {
-      duration: 2500
-    });
+  private notify = (message: string, action: NotificationAction) => this.snackbar.open(message, action, {duration: 3000});
 
 }
 

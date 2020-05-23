@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UtilisateurRestUrl } from '@shared/rest-urls/utilisateur.rest.url';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
