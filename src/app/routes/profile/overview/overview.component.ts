@@ -50,7 +50,7 @@ export class ProfileOverviewComponent implements OnInit {
         id: this.auth.currentUserValue.id
       };
       this.service.changeProfil(profil).subscribe(p => {
-        if(p){
+        if(p) {
           const u: Utilisateur = {
             nom: profil.nom,
             postnom: profil.postnom,
