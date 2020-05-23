@@ -1,6 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective } from '@angular/forms';
-import { Sexe } from '@shared/utils/enums/sexe.enum';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
 import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
@@ -18,8 +17,7 @@ export class ProfileSettingsComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private auth: AuthenticationService,
     private service: UtilisateurService,
-    private notificationService: NotificationService,
-    private renderer: Renderer2) {
+    private notificationService: NotificationService) {
     this.reactiveForm = this.fb.group({
       currentPassword: ['', Validators.required],
       newPassword: ['', this.newPasswordValidator],
@@ -89,22 +87,26 @@ export class ProfileSettingsComponent implements OnInit {
         id: this.auth.currentUserValue.id
       };
       this.service.changePassword(newPassword).subscribe(p => {
-        const u: Utilisateur = {
-          nom: this.auth.currentUserValue.nom,
-          postnom: this.auth.currentUserValue.postnom,
-          prenom: this.auth.currentUserValue.prenom,
-          sexe: this.auth.currentUserValue.sexe,
-          email: this.auth.currentUserValue.email,
-          username: this.auth.currentUserValue.username,
-          id: newPassword.id,
-          photosrc: this.auth.currentUserValue.photosrc,
-          password: newPassword.password,
-          niveauAcces: this.auth.currentUserValue.niveauAcces
-        };
-        this.auth.userSession = u;
-        this.onClear();
-        formDirective.resetForm();
-        this.notificationService.sucess(':: Submitted successfully');
+        if(p) {
+          const u: Utilisateur = {
+            nom: this.auth.currentUserValue.nom,
+            postnom: this.auth.currentUserValue.postnom,
+            prenom: this.auth.currentUserValue.prenom,
+            sexe: this.auth.currentUserValue.sexe,
+            email: this.auth.currentUserValue.email,
+            username: this.auth.currentUserValue.username,
+            id: newPassword.id,
+            photosrc: this.auth.currentUserValue.photosrc,
+            password: newPassword.password,
+            niveauAcces: this.auth.currentUserValue.niveauAcces
+          };
+          this.auth.userSession = u;
+          this.onClear();
+          formDirective.resetForm();
+          this.notificationService.sucess(':: Submitted successfully');
+        } else {
+          this.notificationService.error('Une erreur est parvenue lors du update');
+        }
       }, error => {
         this.notificationService.error(error);
       });

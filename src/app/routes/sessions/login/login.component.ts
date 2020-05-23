@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit {
         this.navigateToDashboard();
       }
     } catch (error) {
-
+      console.log(error);
+      this.notificationService.error(error);
     }
 
   }

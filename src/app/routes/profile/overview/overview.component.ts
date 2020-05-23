@@ -71,6 +71,8 @@ export class ProfileOverviewComponent implements OnInit {
           this.onClear();
           if(doReload) { location.reload(); }
           this.notificationService.sucess(':: Submitted successfully');
+        } else {
+          this.notificationService.error('Une erreur est parvenue lors du update');
         }
 
       }, error => {
