@@ -4,9 +4,9 @@ import { ProfileRoutingModule } from './profile-routing.module';
 
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { ProfileSettingsComponent } from './settings/settings.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
-const COMPONENTS = [ProfileLayoutComponent, EditProfileComponent, ProfileSettingsComponent];
+const COMPONENTS = [ProfileLayoutComponent, EditProfileComponent, ChangePasswordComponent];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({

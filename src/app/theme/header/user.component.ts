@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
         <mat-icon>account_circle</mat-icon>
         <span>{{ 'user.profile' | translate }}</span>
       </a>
-      <a routerLink="/profile/settings" mat-menu-item>
+      <a routerLink="/profile/change-password" mat-menu-item>
         <mat-icon>wb_auto</mat-icon>
         <span>{{ 'change-password' | translate }}</span>
       </a>

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { ProfileSettingsComponent } from './settings/settings.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -17,9 +17,9 @@ const routes: Routes = [
         data: { title: 'Edit Profile' },
       },
       {
-        path: 'settings',
-        component: ProfileSettingsComponent,
-        data: { title: 'Profile Settings' },
+        path: 'change-password',
+        component: ChangePasswordComponent,
+        data: { title: 'Change Password' },
       },
     ],
   },

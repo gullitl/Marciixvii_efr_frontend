@@ -7,9 +7,9 @@ import { NotificationService } from '@shared/services/notification.service';
 
 @Component({
   selector: 'app-profile-settings',
-  templateUrl: './settings.component.html',
+  templateUrl: './change-password.component.html',
 })
-export class ProfileSettingsComponent implements OnInit {
+export class ChangePasswordComponent implements OnInit {
   reactiveForm: FormGroup;
   hidecp = true;
   hidenp = true;
