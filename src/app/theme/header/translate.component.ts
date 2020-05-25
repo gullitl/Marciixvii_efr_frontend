@@ -7,6 +7,7 @@ import { SettingsService } from '@core';
   template: `
     <button mat-icon-button class="matero-toolbar-button" [matMenuTriggerFor]="menu">
       <mat-icon>translate</mat-icon>
+      <span class="badge bg-blue-500">{{currentLang()}}</span>
     </button>
 
     <mat-menu #menu="matMenu">
@@ -30,11 +31,12 @@ export class TranslateComponent {
   };
 
   constructor(public translate: TranslateService, private settings: SettingsService) {
-    translate.addLangs(['fr-FR', 'en-US']);
-    translate.setDefaultLang('fr-FR');
+    this.useLanguage('fr-FR');
+  }
 
-    const browserLang = navigator.language;
-    translate.use(browserLang.match(/fr-FR|en-US/) ? browserLang : 'fr-FR');
+  currentLang() {
+    const lang = this.translate.currentLang.substring(0, 2);
+    return lang.charAt(0).toUpperCase() + lang.slice(1);
   }
 
   useLanguage(language: string) {
