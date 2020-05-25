@@ -18,11 +18,13 @@
       <mat-nav-list class="m-x--16 m-b--16 m-t-16">
         <mat-divider inset></mat-divider>
         <a mat-list-item routerLink="/profile/edit-profile">
-          <mat-icon class="icon-18 m-r-8">account_circle</mat-icon> Editer Profil
+          <mat-icon class="icon-18 m-r-8">account_circle</mat-icon>
+          {{ 'user.edit-profile' | translate }}
         </a>
         <mat-divider inset></mat-divider>
         <a mat-list-item routerLink="/profile/change-password">
-          <mat-icon class="icon-18 m-r-8">wb_auto</mat-icon> Changer Mot de passe
+          <mat-icon class="icon-18 m-r-8">wb_auto</mat-icon>
+          {{ 'user.change-password' | translate }}
         </a>
       </mat-nav-list>
     </mat-card>

@@ -68,7 +68,7 @@
         "helpers.css-class": "CSS Class"
     },
     "user": {
-        "profile": "Profile",
+        "edit-profile": "Edit Profile",
         "change-password": "Change Password",
         "logout": "logout"
     }
