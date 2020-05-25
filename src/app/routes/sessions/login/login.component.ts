@@ -11,7 +11,8 @@ import { NotificationService } from '@shared/services/notification.service';
 })
 export class LoginComponent implements OnInit {
 
-  public authForm: FormGroup;
+  authForm: FormGroup;
+  meanwhile = false;
 
   constructor(private fb: FormBuilder,
               private service: UtilisateurService,
@@ -32,13 +33,12 @@ export class LoginComponent implements OnInit {
       }
     } catch (error) {
       console.log(error);
-      this.notificationService.error(error);
     }
-
   }
 
   login() {
     if(this.authForm.valid) {
+      this.meanwhile = true;
       this.service.login({username: this.authForm.value.username,
                           password: this.authForm.value.password
                         })
@@ -48,8 +48,10 @@ export class LoginComponent implements OnInit {
           this.navigateToDashboard();
         } else {
           this.notificationService.error('Vos données de connection pourraient être invalides ou incompletes');
+          this.meanwhile = false;
         }
       }, error => {
+        this.meanwhile = false;
         console.log(error);
         this.notificationService.error(error);
       });
