@@ -318,13 +318,13 @@
       "icon": "person",
       "children": [
         {
-          "route": "overview",
-          "name": "overview",
+          "route": "edit-profile",
+          "name": "edit-profile",
           "type": "link"
         },
         {
-          "route": "settings",
-          "name": "settings",
+          "route": "change-password",
+          "name": "change-password",
           "type": "link"
         }
       ]

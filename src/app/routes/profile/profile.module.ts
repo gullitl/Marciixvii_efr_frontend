@@ -3,10 +3,10 @@ import { SharedModule } from '@shared/shared.module';
 import { ProfileRoutingModule } from './profile-routing.module';
 
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
-import { ProfileOverviewComponent } from './overview/overview.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ProfileSettingsComponent } from './settings/settings.component';
 
-const COMPONENTS = [ProfileLayoutComponent, ProfileOverviewComponent, ProfileSettingsComponent];
+const COMPONENTS = [ProfileLayoutComponent, EditProfileComponent, ProfileSettingsComponent];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({

@@ -15,13 +15,13 @@ import { Component } from '@angular/core';
     </button>
 
     <mat-menu #menu="matMenu">
-      <a routerLink="/profile/overview" mat-menu-item>
+      <a routerLink="/profile/edit-profile" mat-menu-item>
         <mat-icon>account_circle</mat-icon>
         <span>{{ 'user.profile' | translate }}</span>
       </a>
       <a routerLink="/profile/settings" mat-menu-item>
-        <mat-icon>settings</mat-icon>
-        <span>{{ 'user.settings' | translate }}</span>
+        <mat-icon>wb_auto</mat-icon>
+        <span>{{ 'change-password' | translate }}</span>
       </a>
       <a mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>

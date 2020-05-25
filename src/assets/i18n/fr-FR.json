@@ -55,9 +55,9 @@
         "tables": "tables",
         "tables.kitchen-sink": "Kitchen Sink",
         "tables.remote-data": "Remote Data",
-        "profile": "profile",
-        "profile.overview": "Overview",
-        "profile.settings": "Settings",
+        "profile": "Profil",
+        "profile.edit-profile": "Editer Profil",
+        "profile.change-password": "Changer Mot de passe",
         "extensions": "Extensions",
         "sessions": "sessions",
         "sessions.403": "403",
@@ -68,7 +68,7 @@
     },
     "user": {
         "profile": "Profil",
-        "settings": "Changer Mot de passe",
+        "change-password": "Changer Mot de passe",
         "logout": "logout"
     }
 }

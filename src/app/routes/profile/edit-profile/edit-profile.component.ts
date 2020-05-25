@@ -8,9 +8,9 @@ import { NotificationService } from '@shared/services/notification.service';
 
 @Component({
   selector: 'app-profile-overview',
-  templateUrl: './overview.component.html',
+  templateUrl: './edit-profile.component.html',
 })
-export class ProfileOverviewComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
   reactiveForm: FormGroup;
   sexeList: string[] = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
 

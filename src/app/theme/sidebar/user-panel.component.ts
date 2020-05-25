@@ -9,11 +9,11 @@ import { AuthenticationService } from '@shared/services/authentication.service';
       <h4 class="matero-user-panel-name">{{username()}}</h4>
       <h5 class="matero-user-panel-email">{{email()}}</h5>
       <div class="matero-user-panel-icons">
-        <a routerLink="/profile/overview" mat-icon-button>
+        <a routerLink="/profile/edit-profile" mat-icon-button>
           <mat-icon>account_circle</mat-icon>
         </a>
         <a routerLink="/profile/settings" mat-icon-button>
-          <mat-icon>settings</mat-icon>
+          <mat-icon>wb_auto</mat-icon>
         </a>
         <a routerLink="/auth/login" mat-icon-button (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>
