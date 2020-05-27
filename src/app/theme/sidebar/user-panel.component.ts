@@ -26,9 +26,9 @@ export class UserPanelComponent {
 
   constructor(private auth: AuthenticationService) {}
 
-  username = () => this.auth.currentUserValue.username;
-  email = () => this.auth.currentUserValue.email;
-  photosrc = () => this.auth.currentUserValue.photosrc;
+  username = () => this.auth.sessionUser.username;
+  email = () => this.auth.sessionUser.email;
+  photosrc = () => this.auth.sessionUser.photosrc;
 
   logout() {
     this.auth.disconnect();

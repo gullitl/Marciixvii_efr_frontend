@@ -12,6 +12,7 @@ import { NotificationService } from '@shared/services/notification.service';
 export class LoginComponent implements OnInit {
 
   authForm: FormGroup;
+  doYourememberMe: boolean;
   meanwhile = false;
 
   constructor(private fb: FormBuilder,
@@ -19,20 +20,31 @@ export class LoginComponent implements OnInit {
               private auth: AuthenticationService,
               private router: Router,
               private notificationService: NotificationService) {
-
+  try {
+    this.doYourememberMe = this.auth.localUser.username !== undefined && this.auth.localUser.password !== undefined;
+  } catch (error) {
+    this.doYourememberMe = false;
+    console.log(error);
+  }
     this.authForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
+      rememberMe: [this.doYourememberMe]
     });
   }
 
   ngOnInit() {
     try {
-      if (this.auth.currentUserValue.username !== undefined) {
+      if (this.auth.sessionUser.username !== undefined) {
         this.navigateToDashboard();
+        return;
       }
     } catch (error) {
       console.log(error);
+    }
+    if (this.doYourememberMe) {
+      this.authForm.controls.username.setValue(this.auth.localUser.username);
+      this.authForm.controls.password.setValue(this.auth.localUser.password);
     }
   }
 
@@ -44,7 +56,8 @@ export class LoginComponent implements OnInit {
                         })
       .subscribe(u => {
         if(u) {
-          this.auth.userSession = u;
+          this.auth.sessionUser = u;
+          this.auth.localUser = this.authForm.value.rememberMe ? u : null;
           this.navigateToDashboard();
         } else {
           this.notificationService.error('Vos données de connection pourraient être invalides ou incompletes');

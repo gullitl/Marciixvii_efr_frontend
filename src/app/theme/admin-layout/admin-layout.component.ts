@@ -93,7 +93,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     setTimeout(() => (this.contentWidthFix = this.collapsedWidthFix = false));
-    if (this.auth.currentUserValue === null || this.auth.currentUserValue.username === undefined) {
+    if (this.auth.sessionUser === null || this.auth.sessionUser.username === undefined) {
       this.router.navigateByUrl('/auth/login');
     }
   }

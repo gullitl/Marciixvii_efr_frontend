@@ -34,8 +34,8 @@ export class UserComponent {
 
   constructor(private auth: AuthenticationService) {}
 
-  username = () => this.auth.currentUserValue.username;
-  photosrc = () => this.auth.currentUserValue.photosrc;
+  username = () => this.auth.sessionUser.username;
+  photosrc = () => this.auth.sessionUser.photosrc;
 
   logout() {
     this.auth.disconnect();

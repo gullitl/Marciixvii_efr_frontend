@@ -55,7 +55,7 @@ export class ChangePasswordComponent implements OnInit {
       allright = false;
     }
 
-    if(this.reactiveForm.value.currentPassword !== this.auth.currentUserValue.password) {
+    if(this.reactiveForm.value.currentPassword !== this.auth.sessionUser.password) {
       errMsg = ':: Current Password is wrong';
       elementById = 'crtpwd';
       allright = false;
@@ -84,23 +84,23 @@ export class ChangePasswordComponent implements OnInit {
     if(this.validForm()) {
       const newPassword = {
         password: this.reactiveForm.value.newPassword,
-        id: this.auth.currentUserValue.id
+        id: this.auth.sessionUser.id
       };
       this.service.changePassword(newPassword).subscribe(p => {
         if(p) {
           const u: Utilisateur = {
-            nom: this.auth.currentUserValue.nom,
-            postnom: this.auth.currentUserValue.postnom,
-            prenom: this.auth.currentUserValue.prenom,
-            sexe: this.auth.currentUserValue.sexe,
-            email: this.auth.currentUserValue.email,
-            username: this.auth.currentUserValue.username,
+            nom: this.auth.sessionUser.nom,
+            postnom: this.auth.sessionUser.postnom,
+            prenom: this.auth.sessionUser.prenom,
+            sexe: this.auth.sessionUser.sexe,
+            email: this.auth.sessionUser.email,
+            username: this.auth.sessionUser.username,
             id: newPassword.id,
-            photosrc: this.auth.currentUserValue.photosrc,
+            photosrc: this.auth.sessionUser.photosrc,
             password: newPassword.password,
-            niveauAcces: this.auth.currentUserValue.niveauAcces
+            niveauAcces: this.auth.sessionUser.niveauAcces
           };
-          this.auth.userSession = u;
+          this.auth.sessionUser = u;
           this.onClear();
           formDirective.resetForm();
           this.notificationService.sucess(':: Submitted successfully');

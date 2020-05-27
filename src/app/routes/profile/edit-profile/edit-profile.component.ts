@@ -19,12 +19,12 @@ export class EditProfileComponent implements OnInit {
               private service: UtilisateurService,
               private notificationService: NotificationService) {
     this.reactiveForm = this.fb.group({
-      nom: [this.auth.currentUserValue.nom, [Validators.required]],
-      postnom: [this.auth.currentUserValue.postnom, [Validators.required]],
-      prenom: [this.auth.currentUserValue.prenom, [Validators.required]],
-      sexe: [this.auth.currentUserValue.sexe === Sexe.Masculin ? this.sexeList[0] : this.sexeList[1]],
-      email: [this.auth.currentUserValue.email, [Validators.required, Validators.email]],
-      username: [this.auth.currentUserValue.username, [Validators.required]]
+      nom: [this.auth.sessionUser.nom, [Validators.required]],
+      postnom: [this.auth.sessionUser.postnom, [Validators.required]],
+      prenom: [this.auth.sessionUser.prenom, [Validators.required]],
+      sexe: [this.auth.sessionUser.sexe === Sexe.Masculin ? this.sexeList[0] : this.sexeList[1]],
+      email: [this.auth.sessionUser.email, [Validators.required, Validators.email]],
+      username: [this.auth.sessionUser.username, [Validators.required]]
     });
   }
 
@@ -47,7 +47,7 @@ export class EditProfileComponent implements OnInit {
         sexe: sexeValue,
         email: this.reactiveForm.value.email,
         username: this.reactiveForm.value.username,
-        id: this.auth.currentUserValue.id
+        id: this.auth.sessionUser.id
       };
       this.service.changeProfil(profil).subscribe(p => {
         if(p) {
@@ -59,15 +59,15 @@ export class EditProfileComponent implements OnInit {
             email: profil.email,
             username: profil.username,
             id: profil.id,
-            photosrc: this.auth.currentUserValue.photosrc,
-            password: this.auth.currentUserValue.password,
-            niveauAcces: this.auth.currentUserValue.niveauAcces
+            photosrc: this.auth.sessionUser.photosrc,
+            password: this.auth.sessionUser.password,
+            niveauAcces: this.auth.sessionUser.niveauAcces
           };
           let doReload = false;
-          if(u.username !== this.auth.currentUserValue.username) {
+          if(u.username !== this.auth.sessionUser.username) {
             doReload = true;
           }
-          this.auth.userSession = u;
+          this.auth.sessionUser = u;
           this.onClear();
           if(doReload) { location.reload(); }
           this.notificationService.sucess(':: Submitted successfully');
@@ -88,12 +88,12 @@ export class EditProfileComponent implements OnInit {
 
   initializeFormGroup() {
     this.reactiveForm.setValue({
-      nom: this.auth.currentUserValue.nom,
-      postnom: this.auth.currentUserValue.postnom,
-      prenom: this.auth.currentUserValue.prenom,
-      sexe: this.auth.currentUserValue.sexe === Sexe.Masculin ? this.sexeList[0] : this.sexeList[1],
-      email: this.auth.currentUserValue.email,
-      username: this.auth.currentUserValue.username
+      nom: this.auth.sessionUser.nom,
+      postnom: this.auth.sessionUser.postnom,
+      prenom: this.auth.sessionUser.prenom,
+      sexe: this.auth.sessionUser.sexe === Sexe.Masculin ? this.sexeList[0] : this.sexeList[1],
+      email: this.auth.sessionUser.email,
+      username: this.auth.sessionUser.username
     });
   }
 
@@ -112,15 +112,15 @@ export class EditProfileComponent implements OnInit {
 
     Object.entries(Sexe).filter(([key, value]) => {
       if(value === this.reactiveForm.value.sexe) {
-        return isSexeValueSame = Number(key) === this.auth.currentUserValue.sexe;
+        return isSexeValueSame = Number(key) === this.auth.sessionUser.sexe;
       }
     });
 
-    return this.reactiveForm.value.nom === this.auth.currentUserValue.nom &&
-            this.reactiveForm.value.postnom === this.auth.currentUserValue.postnom &&
-            this.reactiveForm.value.prenom === this.auth.currentUserValue.prenom &&
-            this.reactiveForm.value.username === this.auth.currentUserValue.username &&
-            this.reactiveForm.value.email === this.auth.currentUserValue.email &&
+    return this.reactiveForm.value.nom === this.auth.sessionUser.nom &&
+            this.reactiveForm.value.postnom === this.auth.sessionUser.postnom &&
+            this.reactiveForm.value.prenom === this.auth.sessionUser.prenom &&
+            this.reactiveForm.value.username === this.auth.sessionUser.username &&
+            this.reactiveForm.value.email === this.auth.sessionUser.email &&
             isSexeValueSame;
   }
 
