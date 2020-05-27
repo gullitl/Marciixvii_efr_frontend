@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from '../theme/admin-layout/admin-layout.compone
 import { AuthLayoutComponent } from '../theme/auth-layout/auth-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './sessions/login/login.component';
+import { RegisterComponent } from './sessions/register/register.component';
 
 const routes: Routes = [
   {
@@ -16,46 +17,46 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        data: { title: 'Dashboard', titleI18n: 'dashboard' }
+        data: { title: 'Dashboard', titleI18n: 'dashboard' },
       },
       {
         path: 'registre',
         loadChildren: () => import('./registre/registre.module').then(m => m.RegistreModule),
-        data: { title: 'Registre', titleI18n: 'registre' }
+        data: { title: 'Registre', titleI18n: 'registre' },
       },
       {
         path: 'material',
         loadChildren: () => import('./material/material.module').then(m => m.MaterialModule),
-        data: { title: 'Material', titleI18n: 'material' }
+        data: { title: 'Material', titleI18n: 'material' },
       },
       {
         path: 'media',
         loadChildren: () => import('./media/media.module').then(m => m.MediaModule),
-        data: { title: 'Media', titleI18n: 'media' }
+        data: { title: 'Media', titleI18n: 'media' },
       },
       {
         path: 'forms',
         loadChildren: () => import('./forms/forms.module').then(m => m.FormsModule),
-        data: { title: 'Forms', titleI18n: 'forms' }
+        data: { title: 'Forms', titleI18n: 'forms' },
       },
       {
         path: 'tables',
         loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule),
-        data: { title: 'Tables', titleI18n: 'tables' }
+        data: { title: 'Tables', titleI18n: 'tables' },
       },
       {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
-        data: { title: 'Profile', titleI18n: 'profile' }
+        data: { title: 'Profile', titleI18n: 'profile' },
       },
       {
         path: 'sessions',
         loadChildren: () => import('./sessions/sessions.module').then(m => m.SessionsModule),
-        data: { title: 'Sessions', titleI18n: 'sessions' }
+        data: { title: 'Sessions', titleI18n: 'sessions' },
       },
       {
         path: 'helpers',
-        loadChildren: () => import('./helpers/helpers.module').then(m => m.HelpersModule)
+        loadChildren: () => import('./helpers/helpers.module').then(m => m.HelpersModule),
       },
     ],
   },
@@ -63,20 +64,23 @@ const routes: Routes = [
     path: 'auth',
     component: AuthLayoutComponent,
     children: [
-      { path: 'login',
-        component: LoginComponent,
-        data: { title: 'Login', titleI18n: 'login' } }
+      { path: 'login', component: LoginComponent, data: { title: 'Login', titleI18n: 'login' } },
+      {
+        path: 'register',
+        component: RegisterComponent,
+        data: { title: 'Register', titleI18n: 'register' },
+      },
     ],
   },
-  { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'dashboard' },
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      useHash: environment.useHash
+      useHash: environment.useHash,
     }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class RoutesRoutingModule {}
