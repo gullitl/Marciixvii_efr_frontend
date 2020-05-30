@@ -120,18 +120,10 @@ export class ChangePasswordComponent implements OnInit {
 
   initializeFormGroup() {
     this.reactiveForm.setValue({
-      currentPassword: ' ',
-      newPassword: '  ',
-      confirmNewPassword: '  '
+      currentPassword: '',
+      newPassword: '',
+      confirmNewPassword: ''
     });
-  }
-
-  getErrorMessage(form: FormGroup) {
-    return form.get('email').hasError('required')
-      ? 'You must enter a value'
-      : form.get('email').hasError('email')
-      ? 'Not a valid email'
-      : '';
   }
 
   isTheSame = (): boolean => this.reactiveForm.value.currentPassword === '' ||
