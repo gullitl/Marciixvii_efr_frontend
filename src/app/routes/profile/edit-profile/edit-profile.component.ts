@@ -105,7 +105,7 @@ export class EditProfileComponent implements OnInit {
       : '';
   }
 
-  isFromInvalid = (): boolean => this.reactiveForm.invalid ? true : this.isTheSame() ?? false;
+  isFormInvalid = (): boolean => this.reactiveForm.invalid ? true : this.isTheSame() ?? false;
 
   isTheSame = (): boolean => {
     let isSexeValueSame: boolean;
