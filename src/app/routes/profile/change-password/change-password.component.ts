@@ -45,7 +45,7 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit() {}
 
-  private validForm(): boolean {
+  private isFormValid(): boolean {
     let allright = true;
     let errMsg: string;
     let elementById: string;
@@ -80,8 +80,8 @@ export class ChangePasswordComponent implements OnInit {
     return true;
   }
 
-  onSubmit = (formDirective: FormGroupDirective) => {
-    if(this.validForm()) {
+  onSubmit (formDirective: FormGroupDirective) {
+    if(this.isFormValid()) {
       const newPassword = {
         password: this.reactiveForm.value.newPassword,
         id: this.auth.sessionUser.id
