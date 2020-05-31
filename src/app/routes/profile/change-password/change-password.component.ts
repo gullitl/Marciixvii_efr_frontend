@@ -84,20 +84,20 @@ export class ChangePasswordComponent implements OnInit {
     if(this.isFormValid()) {
       const newPassword = {
         password: this.reactiveForm.value.newPassword,
-        id: this.auth.sessionUser.id
+        username: this.auth.sessionUser.username
       };
       this.service.changePassword(newPassword).subscribe(p => {
         if(p) {
           const u: Utilisateur = {
+            password: newPassword.password,
             nom: this.auth.sessionUser.nom,
             postnom: this.auth.sessionUser.postnom,
             prenom: this.auth.sessionUser.prenom,
             sexe: this.auth.sessionUser.sexe,
             email: this.auth.sessionUser.email,
             username: this.auth.sessionUser.username,
-            id: newPassword.id,
+            id: this.auth.sessionUser.id,
             photosrc: this.auth.sessionUser.photosrc,
-            password: newPassword.password,
             niveauAcces: this.auth.sessionUser.niveauAcces
           };
           this.auth.sessionUser = u;

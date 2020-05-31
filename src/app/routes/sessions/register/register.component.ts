@@ -1,22 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective } from '@angular/forms';
 import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
-import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
-import { Sexe } from '@shared/utils/enums/sexe.enum';
-import { NiveauAcces } from '@shared/utils/enums/niveau-acces.enum';
+import { NotificationService } from '@shared/services/notification.service';
+import { UtilisateurNewPassword } from '@shared/models/dtos/utilisateur-new-password.entity';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+  reactiveForm: FormGroup;
+  meanwhile = false;
 
-  constructor(private fb: FormBuilder, private service: UtilisateurService) {
-    this.registerForm = this.fb.group({
+  constructor(private fb: FormBuilder,
+              private service: UtilisateurService,
+              private router: Router,
+              private notificationService: NotificationService) {
+    this.reactiveForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [this.confirmValidator]],
+      token: ['', [Validators.required]]
     });
   }
 
@@ -25,60 +30,51 @@ export class RegisterComponent implements OnInit {
   confirmValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return { error: true, required: true };
-    } else if (control.value !== this.registerForm.controls.password.value) {
+    } else if (control.value !== this.reactiveForm.controls.password.value) {
       return { error: true, confirm: true };
     }
     return {};
   };
 
-  onSubmit = () => {
-    if (this.registerForm.valid) {
-      let test: any;
-
-      const utilisateur: Utilisateur = {
-        id: 0,
-        nom: 'Luzolo',
-        postnom: 'Lusembo',
-        prenom: 'Plamedi',
-        sexe: Sexe.Masculin,
-        photosrc: '',
-        email: 'plam.l@live.fr',
-        username: this.registerForm.value.username,
-        password: this.registerForm.value.password,
-        niveauAcces: NiveauAcces.Administrateur
+  onSubmit(formDirective: FormGroupDirective) {
+    if(this.reactiveForm.valid) {
+      this.meanwhile = true;
+      const newPassword: UtilisateurNewPassword = {
+        password: this.reactiveForm.value.password,
+        username: this.reactiveForm.value.username,
+        token: this.reactiveForm.value.token
       };
-
-      this.service.create(utilisateur)
-      .subscribe(p => {
-        test = p;
-        console.log(test);
-        this.onClear();
-        // this.notificationService.sucess(':: Submitted successfully');
+      this.service.changePassword(newPassword).subscribe(p => {
+        if(p) {
+          this.onClear();
+          formDirective.resetForm();
+          this.navigateToLogin();
+          this.notificationService.sucess(':: Submitted successfully');
+        } else {
+          this.meanwhile = false;
+          this.notificationService.error('Une erreur est parvenue lors du update');
+        }
       }, error => {
-        console.log('Oops', error);
-        // this.notificationService.sucess('::: Error: '.concat(error));
+        this.meanwhile = false;
+        this.notificationService.error(error);
       });
     }
   }
 
   onClear = () => {
-    this.registerForm.reset();
+    this.reactiveForm.reset();
     this.initializeFormGroup();
   }
 
   initializeFormGroup = () => {
-    this.registerForm.setValue({
-      id: 0,
-      nom: '',
-      postnom: '',
-      prenom: '',
-      sexe: Sexe.Masculin,
-      photosrc: '',
-      email: '',
+    this.reactiveForm.setValue({
       username: '',
       password: '',
-      niveauAcces: NiveauAcces.Administrateur
+      confirmPassword: '',
+      token: ''
     });
   }
+
+  private navigateToLogin = () => this.router.navigateByUrl('/auth/login');
 
 }

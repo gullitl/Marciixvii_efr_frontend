@@ -30,7 +30,7 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit = () => {
+  onSubmit () {
     if (this.reactiveForm.valid) {
       let sexeValue: number;
 
