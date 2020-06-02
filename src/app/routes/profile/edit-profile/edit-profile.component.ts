@@ -97,6 +97,14 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  getErrorMessage(form: FormGroup) {
+    return form.get('email').hasError('required')
+      ? 'You must enter a value'
+      : form.get('email').hasError('email')
+      ? 'Not a valid email'
+      : '';
+  }
+
   isFormInvalid = (): boolean => this.reactiveForm.invalid ? true : this.isTheSame() ?? false;
 
   isTheSame = (): boolean => {
