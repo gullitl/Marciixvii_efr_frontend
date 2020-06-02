@@ -72,4 +72,10 @@
         "change-password": "Change Password",
         "logout": "logout"
     }
+    ,
+    "button": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "login": "Login"
+    }
 }
