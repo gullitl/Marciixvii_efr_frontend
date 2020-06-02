@@ -71,11 +71,21 @@
         "edit-profile": "Edit Profile",
         "change-password": "Change Password",
         "logout": "logout"
-    }
-    ,
+    },
     "button": {
       "save": "Save",
       "cancel": "Cancel",
       "login": "Login"
+    },
+    "label": {
+      "last-name": "Last Name",
+      "post-name": "Postname",
+      "first-name": "First Name",
+      "username": "Username",
+      "email": "E-mail",
+      "sex": "Sex",
+      "current-password": "Current password",
+      "new-password": "New Password",
+      "confirm-new-password": "Confirm New Password"
     }
 }

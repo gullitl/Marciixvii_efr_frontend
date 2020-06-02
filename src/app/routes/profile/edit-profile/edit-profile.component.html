@@ -5,40 +5,40 @@
       <div fxLayout="row wrap" fxLayoutGap="4px grid">
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-form-field appearance="outline">
-            <mat-label>Nom</mat-label>
-            <input matInput placeholder="Simple placeholder" formControlName="nom" required>
+            <mat-label>{{ 'label.last-name' | translate }}</mat-label>
+            <input matInput placeholder="{{ 'label.last-name' | translate }}" formControlName="nom" required>
             <mat-error *ngIf="reactiveForm.get('nom').invalid">Please enter Nom</mat-error>
           </mat-form-field>
         </div>
 
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-form-field appearance="outline">
-            <mat-label>Postnom</mat-label>
-            <input matInput placeholder="Simple placeholder" formControlName="postnom" required>
+            <mat-label>{{ 'label.post-name' | translate }}</mat-label>
+            <input matInput placeholder="{{ 'label.post-name' | translate }}" formControlName="postnom" required>
             <mat-error *ngIf="reactiveForm.get('postnom').invalid">Please enter Postnom</mat-error>
           </mat-form-field>
         </div>
 
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-form-field appearance="outline">
-            <mat-label>Prenom</mat-label>
-            <input matInput placeholder="Simple placeholder" formControlName="prenom" required>
+            <mat-label>{{ 'label.first-name' | translate }}</mat-label>
+            <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" required>
             <mat-error *ngIf="reactiveForm.get('prenom').invalid">Please enter Prenom</mat-error>
           </mat-form-field>
         </div>
 
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-form-field appearance="outline">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Simple placeholder" formControlName="username" required>
+            <mat-label>{{ 'label.username' | translate }}</mat-label>
+            <input matInput placeholder="{{ 'label.username' | translate }}" formControlName="username" required>
             <mat-error *ngIf="reactiveForm.get('username').invalid">Please enter Username</mat-error>
           </mat-form-field>
         </div>
 
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-form-field appearance="outline">
-            <mat-label>E-mail</mat-label>
-            <input matInput placeholder="Simple placeholder" formControlName="email" required>
+            <mat-label>{{ 'label.email' | translate }}</mat-label>
+            <input matInput placeholder="{{ 'label.email' | translate }}" formControlName="email" required>
             <mat-error *ngIf="reactiveForm.get('email').invalid">
               {{getErrorMessage(reactiveForm)}}</mat-error>
           </mat-form-field>
@@ -46,7 +46,7 @@
 
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-radio-group formControlName="sexe" >
-            <div><mat-label>Sexe *</mat-label></div>
+            <div><mat-label>{{ 'label.sex' | translate }} *</mat-label></div>
             <mat-radio-button *ngFor="let sexe of sexeList" [value]="sexe">{{sexe}}</mat-radio-button>
           </mat-radio-group>
         </div>

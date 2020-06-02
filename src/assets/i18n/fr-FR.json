@@ -75,5 +75,16 @@
       "save": "Sauvegarder",
       "cancel": "Annuler",
       "login": "Entrer"
+    },
+    "label": {
+      "last-name": "Nom",
+      "post-name": "Postnom",
+      "first-name": "Prenom",
+      "username": "Username",
+      "email": "E-mail",
+      "sex": "Sexe",
+      "current-password": "Actuel Mot de passe",
+      "new-password": "Nouveau Mot de passe",
+      "confirm-new-password": "Confirmer Nouveau Mot de passe"
     }
 }
