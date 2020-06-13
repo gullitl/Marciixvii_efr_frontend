@@ -51,23 +51,30 @@ export class LoginComponent implements OnInit {
   login() {
     if(this.authForm.valid) {
       this.meanwhile = true;
-      this.service.login({username: this.authForm.value.username,
-                          password: this.authForm.value.password
-                        })
-      .subscribe(u => {
-        if(u) {
-          this.auth.sessionUser = u;
-          this.auth.localUser = this.authForm.value.rememberMe ? u : null;
-          this.navigateToDashboard();
-        } else {
-          this.notificationService.error('Vos données de connection pourraient être invalides ou incompletes');
+      let mawatrop = true;
+      this.service.login({username: this.authForm.value.username, password: this.authForm.value.password})
+        .subscribe(u => {
+          if(u) {
+            this.auth.sessionUser = u;
+            this.auth.localUser = this.authForm.value.rememberMe ? u : null;
+            this.navigateToDashboard();
+          } else {
+            this.notificationService.error('Vos données de connection pourraient être invalides ou incompletes');
+            this.meanwhile = false;
+          }
+          mawatrop = false;
+        }, error => {
           this.meanwhile = false;
-        }
-      }, error => {
-        this.meanwhile = false;
-        console.log(error);
-        this.notificationService.error(error);
-      });
+          mawatrop = false;
+          console.log(error);
+          this.notificationService.error(error);
+        }, () => {
+          if(mawatrop) {
+            this.meanwhile = false;
+            console.log('Mawa trop');
+            this.notificationService.error('Mawa trop');
+          }
+        });
     }
   }
 
