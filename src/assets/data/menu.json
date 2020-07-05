@@ -17,7 +17,7 @@
       "icon": "save",
       "children": [
         {
-          "route": "colors",
+          "route": "clients",
           "name": "medicaments",
           "type": "link"
         },

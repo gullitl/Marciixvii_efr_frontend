@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyValue } from '@angular/common';
 
-import { DesignColorsService } from './colors.service';
 import { MAT_COLORS } from '@shared';
 
 @Component({
-  selector: 'app-design-colors',
-  templateUrl: './colors.component.html',
-  providers: [DesignColorsService],
+  selector: 'app-colors',
+  templateUrl: './clients.component.html',
 })
-export class DesignColorsComponent implements OnInit {
+export class ClientsComponent implements OnInit {
   colors = [];
 
   valueAscOrder(a: KeyValue<number, string>, b: KeyValue<number, string>): number {
@@ -20,7 +18,7 @@ export class DesignColorsComponent implements OnInit {
     return a.key - b.key;
   }
 
-  constructor(private colorsSrv: DesignColorsService) {}
+  constructor() {}
 
   ngOnInit() {
     const _colors = MAT_COLORS;
