@@ -2,7 +2,7 @@
     "menu": {
         "dashboard": "Dashboard",
         "registre": "Registre",
-        "registre.medicaments": "Medicaments",
+        "registre.clients": "Clients",
         "registre.materiels": "Materiels",
         "material": "Material",
         "material.form-controls": "Form Controls",

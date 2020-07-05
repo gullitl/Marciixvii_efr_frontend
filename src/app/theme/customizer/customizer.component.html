@@ -5,6 +5,9 @@
   <button mat-fab (click)="openPanel($event)">
     <mat-icon aria-label="Example icon-button with a settings icon">settings</mat-icon>
   </button>
+  <button mat-fab (click)="openPanel($event)">
+    <mat-icon aria-label="Example icon-button with a settings icon">style</mat-icon>
+  </button>
 </div>
 
 <div [ngClass]="{ 'customizer-panel': true, 'mat-elevation-z12 opened': opened }">

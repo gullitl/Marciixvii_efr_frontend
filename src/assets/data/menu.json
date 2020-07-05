@@ -17,8 +17,8 @@
       "icon": "save",
       "children": [
         {
-          "route": "clients",
-          "name": "medicaments",
+          "route": "clients/clients-list",
+          "name": "clients",
           "type": "link"
         },
         {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective } from '@angular/forms';
 import { AuthenticationService } from '@shared/services/authentication.service';
 import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
@@ -6,10 +6,10 @@ import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
 import { NotificationService } from '@shared/services/notification.service';
 
 @Component({
-  selector: 'app-profile-settings',
-  templateUrl: './change-password.component.html',
+  selector: 'app-clients-list',
+  templateUrl: './clients-list.component.html',
 })
-export class ChangePasswordComponent implements OnInit {
+export class ClientsListComponent implements OnInit {
   reactiveForm: FormGroup;
   hidecp = true;
   hidenp = true;

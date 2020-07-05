@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { SettingsService } from '@core';
 import { CdkDragStart } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customizer',
@@ -14,7 +15,8 @@ export class CustomizerComponent implements OnInit {
   dragging = false;
   @Output() optionsEvent = new EventEmitter<object>();
 
-  constructor(private settings: SettingsService) {}
+  constructor(private settings: SettingsService,
+              private router: Router) {}
 
   ngOnInit() {}
 
@@ -40,5 +42,7 @@ export class CustomizerComponent implements OnInit {
 
   sendOptions() {
     this.optionsEvent.emit(this.options);
+    this.router.navigateByUrl('/register/clients/clients-list');
+    this.closePanel();
   }
 }

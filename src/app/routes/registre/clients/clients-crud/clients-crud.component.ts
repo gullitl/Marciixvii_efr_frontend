@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Sexe } from '@shared/utils/enums/sexe.enum';
 import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
 import { AuthenticationService } from '@shared/services/authentication.service';
@@ -7,10 +7,10 @@ import { UtilisateurService } from '@shared/services/domain/utilisateur.service'
 import { NotificationService } from '@shared/services/notification.service';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
+  selector: 'app-clients-crud',
+  templateUrl: './clients-crud.component.html',
 })
-export class EditProfileComponent implements OnInit {
+export class ClientsCrudComponent implements OnInit {
   reactiveForm: FormGroup;
   sexeList: string[] = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
 
