@@ -19,9 +19,9 @@ import { Component } from '@angular/core';
         <mat-icon>account_circle</mat-icon>
         <span>{{ 'user.edit-profile' | translate }}</span>
       </a>
-      <a routerLink="/profile/change-password" mat-menu-item>
-        <mat-icon>wb_auto</mat-icon>
-        <span>{{ 'change-password' | translate }}</span>
+      <a routerLink="/dashboard/dashboard" mat-menu-item>
+        <mat-icon>dashboard</mat-icon>
+        <span>{{ 'menu.dashboard' | translate }}</span>
       </a>
       <a mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>

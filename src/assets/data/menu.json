@@ -321,11 +321,6 @@
           "route": "edit-profile",
           "name": "edit-profile",
           "type": "link"
-        },
-        {
-          "route": "change-password",
-          "name": "change-password",
-          "type": "link"
         }
       ]
     },

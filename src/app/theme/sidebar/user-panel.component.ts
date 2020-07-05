@@ -12,8 +12,8 @@ import { AuthenticationService } from '@shared/services/authentication.service';
         <a routerLink="/profile/edit-profile" mat-icon-button>
           <mat-icon>account_circle</mat-icon>
         </a>
-        <a routerLink="/profile/change-password" mat-icon-button>
-          <mat-icon>wb_auto</mat-icon>
+        <a routerLink="/dashboard/dashboard" mat-icon-button>
+          <mat-icon>dashboard</mat-icon>
         </a>
         <a routerLink="/auth/login" mat-icon-button (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>
