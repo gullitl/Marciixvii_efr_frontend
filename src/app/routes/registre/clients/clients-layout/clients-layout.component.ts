@@ -1,18 +1,15 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from '@shared/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clients-layout',
   templateUrl: './clients-layout.component.html',
 })
 export class ClientsLayoutComponent {
-  isCrud = false;
+  clientsUrl = '/registre/clients';
+  isCrud: boolean;
 
-  constructor(private auth: AuthenticationService) {}
-
-  route() {
-    if(this.isCrud) {
-      this.isCrud = false;
-    } else this.isCrud = true;
+  constructor(private router: Router) {
+    this.isCrud = router.url === this.clientsUrl;
   }
 }

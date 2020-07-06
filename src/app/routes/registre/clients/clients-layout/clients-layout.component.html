@@ -1,14 +1,14 @@
 <page-header class="bg-purple-500"></page-header>
 
 <div class="matero-row">
-  <div >
-      <a *ngIf="isCrud"  routerLink="/registre/clients-crud" onclick="route()">
+  <div fxLayoutAlign="end center" >
+      <a mat-button color="primary" *ngIf="isCrud" routerLink="/registre/clients-crud" (click)="isCrud=false" >
         <mat-icon class="icon-18 m-r-8">account_circle</mat-icon>
-        {{ 'user.edit-profile' | translate }}
+        {{ 'clients.edit-client' | translate }}
       </a>
-      <a *ngIf="!isCrud" routerLink="/registre/clients" onclick="route()">
+      <a mat-button color="primary" *ngIf="!isCrud" routerLink="/registre/clients" (click)="isCrud=true" >
         <mat-icon class="icon-18 m-r-8">wb_auto</mat-icon>
-        {{ 'user.change-password' | translate }}
+        {{ 'clients.list-client' | translate }}
       </a>
   </div>
   <div>

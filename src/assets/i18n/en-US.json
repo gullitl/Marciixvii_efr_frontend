@@ -75,6 +75,10 @@
         "change-password": "Change Password",
         "logout": "logout"
     },
+    "clients": {
+      "edit-client": "Edit Client",
+      "list-client": "List of clients"
+    },
     "button": {
       "save": "Save",
       "cancel": "Cancel",

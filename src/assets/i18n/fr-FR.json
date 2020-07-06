@@ -67,12 +67,16 @@
         "helpers.css-class": "CSS Class"
     },
     "page-header": {
-        "personal-profile": "Profil Personel"
+        "personal-profile": "Profil Personnel"
     },
     "user": {
         "edit-profile": "Editer Profil",
         "change-password": "Changer Mot de passe",
         "logout": "logout"
+    },
+    "clients": {
+      "edit-client": "Editer Client",
+      "list-client": "Liste des clients"
     },
     "button": {
       "save": "Sauvegarder",
