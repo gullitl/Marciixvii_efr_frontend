@@ -17,7 +17,7 @@
       "icon": "save",
       "children": [
         {
-          "route": "clients/clients-list",
+          "route": "clients",
           "name": "clients",
           "type": "link"
         },

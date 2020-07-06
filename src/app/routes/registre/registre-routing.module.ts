@@ -11,14 +11,14 @@ const routes: Routes = [
     path: '',
     component: ClientsLayoutComponent,
     children: [
-      { path: '', redirectTo: 'clients-list', pathMatch: 'full' },
+      { path: '', redirectTo: 'clients', pathMatch: 'full' },
       {
-        path: 'clients/clients-list',
+        path: 'clients',
         component: ClientsListComponent,
         data: { title: 'Client List' },
       },
       {
-        path: 'clients/clients-crud',
+        path: 'clients-crud',
         component: ClientsCrudComponent,
         data: { title: 'Add Client' },
       },

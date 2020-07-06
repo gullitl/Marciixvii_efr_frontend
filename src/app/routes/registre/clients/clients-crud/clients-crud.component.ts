@@ -30,6 +30,11 @@ export class ClientsCrudComponent implements OnInit {
 
   ngOnInit() {}
 
+  username = () => this.auth.sessionUser.username;
+  email = () => this.auth.sessionUser.email;
+  photosrc = () => this.auth.sessionUser.photosrc;
+  completName = () => `${this.auth.sessionUser.prenom} ${this.auth.sessionUser.nom} ${this.auth.sessionUser.postnom}`;
+
   onSubmit () {
     if (this.reactiveForm.valid) {
       let sexeValue: number;
