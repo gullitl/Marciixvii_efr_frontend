@@ -1,133 +1,110 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl, FormGroupDirective } from '@angular/forms';
-import { AuthenticationService } from '@shared/services/authentication.service';
-import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
-import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
-import { NotificationService } from '@shared/services/notification.service';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+
+import { MtxDialog } from '@ng-matero/extensions/dialog';
+
+import { TablesKitchenSinkService } from './clients-list.service';
+import { TablesDataService } from '../data.service';
+import { TablesKitchenSinkEditComponent } from './edit/edit.component';
+import { MtxGridColumn } from '@ng-matero/extensions';
 
 @Component({
-  selector: 'app-clients-list',
+  selector: 'app-table-clients-list',
   templateUrl: './clients-list.component.html',
+  styleUrls: ['./clients-list.component.scss'],
+  providers: [TablesKitchenSinkService, TablesDataService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClientsListComponent implements OnInit {
-  reactiveForm: FormGroup;
-  hidecp = true;
-  hidenp = true;
+export class TablesKitchenSinkComponent implements OnInit {
+  columns: MtxGridColumn[] = [
+    { header: 'Position', field: 'position', sortable: true },
+    { header: 'Name', field: 'name', sortable: true, disabled: true },
+    { header: 'Weight', field: 'weight' },
+    { header: 'Symbol', field: 'symbol' },
+    { header: 'Gender', field: 'gender' },
+    { header: 'Mobile', field: 'mobile', hide: true },
+    { header: 'Tele', field: 'tele' },
+    { header: 'City', field: 'city' },
+    { header: 'Address', field: 'address', width: '200px' },
+    { header: 'Date', field: 'date' },
+    { header: 'Website', field: 'website' },
+    { header: 'Company', field: 'company' },
+    { header: 'Email', field: 'email' },
+    {
+      header: 'Option',
+      field: 'option',
+      width: '120px',
+      pinned: 'right',
+      right: '0px',
+      type: 'button',
+      buttons: [
+        {
+          icon: 'edit',
+          tooltip: 'Edit',
+          type: 'icon',
+          click: record => this.edit(record),
+        },
+        {
+          icon: 'delete',
+          tooltip: 'Delete',
+          color: 'warn',
+          type: 'icon',
+          pop: true,
+          popTitle: 'Confirm delete?',
+          click: record => this.delete(record),
+        },
+      ],
+    },
+  ];
+  list = [];
+  isLoading = true;
 
-  constructor(private fb: FormBuilder,
-    private auth: AuthenticationService,
-    private service: UtilisateurService,
-    private notificationService: NotificationService) {
-    this.reactiveForm = this.fb.group({
-      currentPassword: ['', Validators.required],
-      newPassword: ['', this.newPasswordValidator],
-      confirmNewPassword: ['', [this.confirmValidator]]
+  multiSelectable = true;
+  rowSelectable = true;
+  hideRowSelectionCheckbox = false;
+  showToolbar = true;
+  columnHideable = true;
+  columnMovable = true;
+  rowHover = false;
+  rowStriped = false;
+  showPaginator = true;
+  expandable = false;
+
+  constructor(
+    private kitchenSrv: TablesKitchenSinkService,
+    private dataSrv: TablesDataService,
+    private cdr: ChangeDetectorRef,
+    public dialog: MtxDialog
+  ) {}
+
+  ngOnInit() {
+    this.list = this.dataSrv.getData();
+    this.isLoading = false;
+  }
+
+  edit(value: any) {
+    const dialogRef = this.dialog.originalOpen(TablesKitchenSinkEditComponent, {
+      width: '600px',
+      data: { record: value },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 
-  confirmValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return { error: true, required: true };
-    } else if (control.value !== this.reactiveForm.controls.newPassword.value) {
-      return { error: true, confirm: true };
-    }
-    return {};
-  };
-
-  newPasswordValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return { error: true, required: true };
-    } else if (control.value === this.reactiveForm.controls.currentPassword.value) {
-      return { error: true, confirm: true };
-    }
-    return {};
-  };
-
-  ngOnInit() {}
-
-  private isFormValid(): boolean {
-    let allright = true;
-    let errMsg: string;
-    let elementById: string;
-
-    if (this.reactiveForm.invalid) {
-      errMsg = ':: Same thing went wrong';
-      allright = false;
-    }
-
-    if(this.reactiveForm.value.currentPassword !== this.auth.sessionUser.password) {
-      errMsg = ':: Current Password is wrong';
-      elementById = 'crtpwd';
-      allright = false;
-    }
-
-    if(this.reactiveForm.value.currentPassword === this.reactiveForm.value.newPassword) {
-      errMsg = ':: Password remains the same';
-      elementById = 'newpwd';
-      allright = false;
-    }
-    if(this.reactiveForm.value.newPassword !== this.reactiveForm.value.confirmNewPassword) {
-      errMsg = ':: Password is inconsistent';
-      elementById = 'cfmpwd';
-      allright = false;
-    }
-
-    if (!allright) {
-      this.notificationService.error(errMsg);
-      if(elementById) {(document.getElementById(elementById) as HTMLInputElement).select();}
-      return false;
-    }
-    return true;
+  delete(value: any) {
+    this.dialog.alert(`You have deleted ${value.position}!`);
   }
 
-  onSubmit (formDirective: FormGroupDirective) {
-    if(this.isFormValid()) {
-      const newPassword = {
-        password: this.reactiveForm.value.newPassword,
-        username: this.auth.sessionUser.username
-      };
-      this.service.changePassword(newPassword).subscribe(p => {
-        if(p) {
-          const u: Utilisateur = {
-            password: newPassword.password,
-            nom: this.auth.sessionUser.nom,
-            postnom: this.auth.sessionUser.postnom,
-            prenom: this.auth.sessionUser.prenom,
-            sexe: this.auth.sessionUser.sexe,
-            email: this.auth.sessionUser.email,
-            username: this.auth.sessionUser.username,
-            id: this.auth.sessionUser.id,
-            photosrc: this.auth.sessionUser.photosrc,
-            niveauAcces: this.auth.sessionUser.niveauAcces
-          };
-          this.auth.sessionUser = u;
-          this.onClear();
-          formDirective.resetForm();
-          this.notificationService.sucess(':: Submitted successfully');
-        } else {
-          this.notificationService.error('Une erreur est parvenue lors du update');
-        }
-      }, error => {
-        this.notificationService.error(error);
-      });
-    }
+  changeSelect(e: any) {
+    console.log(e);
   }
 
-  onClear() {
-    this.reactiveForm.reset();
-    this.initializeFormGroup();
+  changeSort(e: any) {
+    console.log(e);
   }
 
-  initializeFormGroup() {
-    this.reactiveForm.setValue({
-      currentPassword: ' ',
-      newPassword: '  ',
-      confirmNewPassword: '  '
-    });
+  enableRowExpandable() {
+    this.columns[0].showExpand = this.expandable;
   }
-
-  isTheSame = (): boolean => this.reactiveForm.value.currentPassword === '' ||
-                            this.reactiveForm.value.newPassword === '' ||
-                            this.reactiveForm.value.confirmNewPassword === '';
-
 }

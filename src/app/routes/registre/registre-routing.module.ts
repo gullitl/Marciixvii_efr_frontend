@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DesignIconsComponent } from './icons/icons.component';
 import { ClientsLayoutComponent } from './clients/clients-layout/clients-layout.component';
-import { ClientsListComponent } from './clients/clients-list/clients-list.component';
+import { TablesKitchenSinkComponent } from './clients/clients-list/clients-list.component';
 import { ClientsCrudComponent } from './clients/clients-crud/clients-crud.component';
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'clients', pathMatch: 'full' },
       {
         path: 'clients',
-        component: ClientsListComponent,
+        component: TablesKitchenSinkComponent,
         data: { title: 'Client List' },
       },
       {

@@ -1,62 +1,42 @@
-<div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="100" fxFlex.gt-md="100">
-  <mat-card>
-    <mat-card-title>{{ 'clients.list-client' | translate }}</mat-card-title>
-    <mat-card-content>
-      <form [formGroup]="reactiveForm" class="form-field-full" #formDirective="ngForm">
-        <div fxLayout="row wrap" fxLayoutGap="4px grid">
-
-          <div fxFlex="50" fxFlex.lt-md="100">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'label.current-password' | translate }}</mat-label>
-              <input id="crtpwd" matInput [type]="hidecp ? 'password' : 'text'" placeholder="{{ 'label.current-password' | translate }}" formControlName="currentPassword" required>
-              <button mat-icon-button matSuffix (click)="hidecp = !hidecp" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidecp">
-                <mat-icon>{{hidecp ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error *ngIf="reactiveForm.get('currentPassword').invalid">Please enter password</mat-error>
-            </mat-form-field>
-          </div>
-          <div fxFlex="50" fxFlex.lt-md="100"></div>
-
-          <div fxFlex="50" fxFlex.lt-md="100">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'label.new-password' | translate }}</mat-label>
-              <input id="newpwd" matInput [type]="hidenp ? 'password' : 'text'" placeholder="{{ 'label.new-password' | translate }}" formControlName="newPassword" required>
-              <button mat-icon-button matSuffix (click)="hidenp = !hidenp" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidenp">
-                <mat-icon>{{hidenp ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error *ngIf="reactiveForm.get('newPassword').hasError('required')">Please enter password</mat-error>
-              <mat-error *ngIf="reactiveForm.get('newPassword').hasError('confirm')">Password remains the same</mat-error>
-            </mat-form-field>
-          </div>
-
-          <div fxFlex="50" fxFlex.lt-md="100">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'label.confirm-new-password' | translate }}</mat-label>
-              <input id="cfmpwd" matInput placeholder="{{ 'label.confirm-new-password' | translate }}" type="password" formControlName="confirmNewPassword" required>
-              <mat-error *ngIf="reactiveForm.get('confirmNewPassword').hasError('required')">Please confirm your password</mat-error>
-              <mat-error *ngIf="reactiveForm.get('confirmNewPassword').hasError('confirm')">Password is inconsistent</mat-error>
-            </mat-form-field>
-          </div>
-
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="end center">
-          <button mat-raised-button color="primary" class="m-l-8" (click)="onSubmit(formDirective)" [disabled]="reactiveForm.invalid">{{ 'button.save' | translate }}</button>
-          <button mat-raised-button color="accent" class="m-l-8" (click)="onClear()" [disabled]="isTheSame()">{{ 'button.cancel' | translate }}</button>
-        </div>
-
-      </form>
-    </mat-card-content>
-  </mat-card>
+<div class="data-grid-options">
+    <mat-checkbox [(ngModel)]="rowSelectable">Row Selectable</mat-checkbox>
+    <mat-checkbox [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
+    <mat-radio-group [(ngModel)]="multiSelectable">
+        <mat-radio-button [value]="false">Single Selectable</mat-radio-button>
+        <mat-radio-button [value]="true">Multiple Selectable</mat-radio-button>
+    </mat-radio-group>
+    <mat-checkbox [(ngModel)]="showToolbar">Show Toolbar</mat-checkbox>
+    <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
+    <mat-checkbox [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
+    <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
+    <mat-checkbox [(ngModel)]="rowStriped">Striped</mat-checkbox>
+    <mat-checkbox [(ngModel)]="expandable" (change)="enableRowExpandable()">Row Expandable
+    </mat-checkbox>
+    <mat-checkbox [(ngModel)]="showPaginator">Show Paginator</mat-checkbox>
+    <mat-checkbox [(ngModel)]="isLoading">Loading Status</mat-checkbox>
 </div>
 
-
-
-
-
-
-
-
-
-
-
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [loading]="isLoading"
+          [multiSelectable]="multiSelectable"
+          [rowSelectable]="rowSelectable"
+          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [rowHover]="rowHover"
+          [rowStriped]="rowStriped"
+          [showToolbar]="showToolbar"
+          [columnHideable]="columnHideable"
+          [columnMovable]="columnMovable"
+          [expandable]="expandable"
+          [expansionTemplate]="expansionTpl"
+          [pageOnFront]="showPaginator"
+          [showPaginator]="showPaginator"
+          [pageSizeOptions]="[5,10,50,100]"
+          [pageIndex]="0"
+          [pageSize]="5"
+          (sortChange)="changeSort($event)"
+          (selectionChange)="changeSelect($event)">
+</mtx-grid>
+<ng-template #expansionTpl let-row>
+    {{row.name}}
+</ng-template>
