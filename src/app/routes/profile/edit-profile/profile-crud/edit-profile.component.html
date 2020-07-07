@@ -5,6 +5,14 @@
       <div fxLayout="row wrap" fxLayoutGap="4px grid">
         <div fxFlex="50" fxFlex.lt-md="100">
           <mat-form-field appearance="outline">
+            <mat-label>{{ 'label.first-name' | translate }}</mat-label>
+            <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" required>
+            <mat-error *ngIf="reactiveForm.get('prenom').invalid">Please enter Prenom</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-md="100">
+          <mat-form-field appearance="outline">
             <mat-label>{{ 'label.last-name' | translate }}</mat-label>
             <input matInput placeholder="{{ 'label.last-name' | translate }}" formControlName="nom" required>
             <mat-error *ngIf="reactiveForm.get('nom').invalid">Please enter Nom</mat-error>
@@ -16,14 +24,6 @@
             <mat-label>{{ 'label.post-name' | translate }}</mat-label>
             <input matInput placeholder="{{ 'label.post-name' | translate }}" formControlName="postnom" required>
             <mat-error *ngIf="reactiveForm.get('postnom').invalid">Please enter Postnom</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div fxFlex="50" fxFlex.lt-md="100">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'label.first-name' | translate }}</mat-label>
-            <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" required>
-            <mat-error *ngIf="reactiveForm.get('prenom').invalid">Please enter Prenom</mat-error>
           </mat-form-field>
         </div>
 
