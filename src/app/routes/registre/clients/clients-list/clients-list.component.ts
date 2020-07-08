@@ -6,6 +6,7 @@ import { TablesKitchenSinkService } from './clients-list.service';
 import { TablesDataService } from '../data.service';
 import { TablesKitchenSinkEditComponent } from './edit/edit.component';
 import { MtxGridColumn } from '@ng-matero/extensions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-clients-list',
@@ -16,19 +17,12 @@ import { MtxGridColumn } from '@ng-matero/extensions';
 })
 export class TablesKitchenSinkComponent implements OnInit {
   columns: MtxGridColumn[] = [
-    { header: 'Position', field: 'position', sortable: true },
-    { header: 'Name', field: 'name', sortable: true, disabled: true },
-    { header: 'Weight', field: 'weight' },
-    { header: 'Symbol', field: 'symbol' },
+    { header: 'Position', field: 'position', width: '100px', sortable: true },
+    { header: 'Avatar', field: 'avatar', type: 'image' },
+    { header: 'Name', field: 'name', width: '250px', sortable: true, disabled: true },
+    { header: 'Mobile', field: 'mobile' },
     { header: 'Gender', field: 'gender' },
-    { header: 'Mobile', field: 'mobile', hide: true },
-    { header: 'Tele', field: 'tele' },
-    { header: 'City', field: 'city' },
-    { header: 'Address', field: 'address', width: '200px' },
-    { header: 'Date', field: 'date' },
-    { header: 'Website', field: 'website' },
-    { header: 'Company', field: 'company' },
-    { header: 'Email', field: 'email' },
+    { header: 'Address', field: 'address', width: '400px' },
     {
       header: 'Option',
       field: 'option',
@@ -69,10 +63,17 @@ export class TablesKitchenSinkComponent implements OnInit {
   showPaginator = true;
   expandable = false;
 
+  query = {
+    q: 'user:nzbin',
+    sort: 'stars',
+    order: 'desc',
+    page: 0,
+    per_page: 5,
+  };
+
   constructor(
-    private kitchenSrv: TablesKitchenSinkService,
     private dataSrv: TablesDataService,
-    private cdr: ChangeDetectorRef,
+    private router: Router,
     public dialog: MtxDialog
   ) {}
 
@@ -82,14 +83,15 @@ export class TablesKitchenSinkComponent implements OnInit {
   }
 
   edit(value: any) {
-    const dialogRef = this.dialog.originalOpen(TablesKitchenSinkEditComponent, {
-      width: '600px',
-      data: { record: value },
-    });
+    this.router.navigateByUrl('/registre/clients-crud');
+    // const dialogRef = this.dialog.originalOpen(TablesKitchenSinkEditComponent, {
+    //   width: '600px',
+    //   data: { record: value },
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
   delete(value: any) {
@@ -106,5 +108,10 @@ export class TablesKitchenSinkComponent implements OnInit {
 
   enableRowExpandable() {
     this.columns[0].showExpand = this.expandable;
+  }
+
+  search() {
+    this.query.page = 0;
+    this.dataSrv.getData();
   }
 }

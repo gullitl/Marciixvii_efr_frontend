@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { serialize } from '@shared';
 
 export interface PeriodicElement {
+  avatar: string;
   name: string;
   position: number;
   weight: number;
@@ -18,6 +21,7 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 1,
     name: 'Hydrogen',
     weight: 1.0079,
@@ -33,6 +37,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Hydrogen@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 2,
     name: 'Helium',
     weight: 4.0026,
@@ -48,6 +53,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Helium@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 3,
     name: 'Lithium',
     weight: 6.941,
@@ -63,6 +69,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Lithium@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 4,
     name: 'Beryllium',
     weight: 9.0122,
@@ -78,6 +85,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Beryllium@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 5,
     name: 'Boron',
     weight: 10.811,
@@ -93,6 +101,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Boron@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 6,
     name: 'Carbon',
     weight: 12.0107,
@@ -108,6 +117,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Carbon@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 7,
     name: 'Nitrogen',
     weight: 14.0067,
@@ -123,6 +133,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Nitrogen@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 8,
     name: 'Oxygen',
     weight: 15.9994,
@@ -138,6 +149,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Oxygen@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 9,
     name: 'Fluorine',
     weight: 18.9984,
@@ -153,6 +165,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Fluorine@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 10,
     name: 'Neon',
     weight: 20.1797,
@@ -168,6 +181,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Neon@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 11,
     name: 'Carbon',
     weight: 12.0107,
@@ -183,6 +197,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Carbon@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 12,
     name: 'Nitrogen',
     weight: 14.0067,
@@ -198,6 +213,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Nitrogen@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 13,
     name: 'Oxygen',
     weight: 15.9994,
@@ -213,6 +229,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Oxygen@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 14,
     name: 'Fluorine',
     weight: 18.9984,
@@ -228,6 +245,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Fluorine@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 15,
     name: 'Neon',
     weight: 20.1797,
@@ -243,6 +261,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Neon@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 16,
     name: 'Hydrogen',
     weight: 1.0079,
@@ -258,6 +277,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Hydrogen@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 17,
     name: 'Helium',
     weight: 4.0026,
@@ -273,6 +293,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Helium@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 18,
     name: 'Lithium',
     weight: 6.941,
@@ -288,6 +309,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Lithium@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 19,
     name: 'Beryllium',
     weight: 9.0122,
@@ -303,6 +325,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     email: 'Beryllium@gmail.com',
   },
   {
+    avatar: 'assets/images/avatar.jpg',
     position: 20,
     name: 'Boron',
     weight: 10.811,
@@ -321,7 +344,14 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 @Injectable()
 export class TablesDataService {
+
+  constructor(private http: HttpClient) {}
+
   getData() {
     return ELEMENT_DATA;
   }
+
+  // getData(query = {}) {
+  //   return this.http.get('https://api.github.com/search/repositories?' + serialize(query));
+  // }
 }

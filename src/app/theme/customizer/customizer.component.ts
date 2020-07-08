@@ -42,7 +42,7 @@ export class CustomizerComponent implements OnInit {
 
   sendOptions() {
     this.optionsEvent.emit(this.options);
-    this.router.navigateByUrl('/register/clients/clients-list');
+    this.router.navigateByUrl('/registre/clients');
     this.closePanel();
   }
 }
