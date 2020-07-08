@@ -2,9 +2,7 @@
   <mat-card>
     <div class="text-center">
       <img class="m-b-8 r-full" [src]="photosrc()" alt="" width="80">
-      <h2 class="m-t-0 m-b-8 f-w-400">{{username()}}</h2>
-      <p class="m-t-0 m-b-8">{{email()}}</p>
-      <p class="m-t-0 text-grey-500">{{completName()}}</p>
+      <p class="m-t-0 text-grey-500"></p>
 
       <button mat-raised-button color="primary" href="https://github.com/nzbin" target="_blank">{{ 'button.change-photo' | translate }}</button>
       <button mat-raised-button color="accent" class="m-l-8">{{ 'button.remove-photo' | translate }}</button>
@@ -16,6 +14,7 @@
     <mat-card-title>{{ 'clients.edit-client' | translate }}</mat-card-title>
     <mat-card-content>
       <form [formGroup]="reactiveForm" class="form-field-full">
+        <input type="hidden" formControlName="id">
         <div fxLayout="row wrap" fxLayoutGap="4px grid">
           <div fxFlex="50" fxFlex.lt-md="100">
             <mat-form-field appearance="outline">
@@ -24,7 +23,7 @@
               <mat-error *ngIf="reactiveForm.get('prenom').invalid">Please enter Prenom</mat-error>
             </mat-form-field>
           </div>
-          
+
           <div fxFlex="50" fxFlex.lt-md="100">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'label.last-name' | translate }}</mat-label>
@@ -33,28 +32,21 @@
             </mat-form-field>
           </div>
 
-          <div fxFlex="50" fxFlex.lt-md="100">
+          <div fxFlex="10" fxFlex.lt-md="100">
             <mat-form-field appearance="outline">
-              <mat-label>{{ 'label.post-name' | translate }}</mat-label>
-              <input matInput placeholder="{{ 'label.post-name' | translate }}" formControlName="postnom" required>
-              <mat-error *ngIf="reactiveForm.get('postnom').invalid">Please enter Postnom</mat-error>
+              <mat-select required>
+                <mat-option>-- None --</mat-option>
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>phone_iphone</mat-icon></mat-label>
             </mat-form-field>
           </div>
 
-          <div fxFlex="50" fxFlex.lt-md="100">
+          <div fxFlex="40" fxFlex.lt-md="100">
             <mat-form-field appearance="outline">
-              <mat-label>{{ 'label.username' | translate }}</mat-label>
-              <input matInput placeholder="{{ 'label.username' | translate }}" formControlName="username" required>
-              <mat-error *ngIf="reactiveForm.get('username').invalid">Please enter Username</mat-error>
-            </mat-form-field>
-          </div>
-
-          <div fxFlex="50" fxFlex.lt-md="100">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'label.email' | translate }}</mat-label>
-              <input matInput placeholder="{{ 'label.email' | translate }}" formControlName="email" required>
-              <mat-error *ngIf="reactiveForm.get('email').invalid">
-                {{getErrorMessage(reactiveForm)}}</mat-error>
+              <mat-label>{{ 'label.phone-number' | translate }}</mat-label>
+              <input matInput placeholder="{{ 'label.phone-number' | translate }}" formControlName="telephone" required>
+              <mat-error *ngIf="reactiveForm.get('telephone').invalid">Please enter Postnom</mat-error>
             </mat-form-field>
           </div>
 
@@ -64,11 +56,20 @@
               <mat-radio-button *ngFor="let sexe of sexeList" [value]="sexe">{{sexe}}</mat-radio-button>
             </mat-radio-group>
           </div>
+
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'label.adress' | translate }}</mat-label>
+              <input matInput placeholder="{{ 'label.adress' | translate }}" formControlName="adresse" >
+            </mat-form-field>
+          </div>
+
+
         </div>
 
         <div fxLayout="row" fxLayoutAlign="end center">
-          <button mat-raised-button color="primary" class="m-l-8" (click)="onSubmit()" [disabled]="isFormInvalid()">{{ 'button.save' | translate }}</button>
-          <button mat-raised-button color="accent" class="m-l-8" (click)="onClear()" [disabled]="isTheSame()">{{ 'button.cancel' | translate }}</button>
+          <button mat-raised-button color="primary" class="m-l-8" (click)="onSubmit()" [disabled]="true">{{ 'button.save' | translate }}</button>
+          <button mat-raised-button color="accent" class="m-l-8" (click)="onClear()" [disabled]="true">{{ 'button.cancel' | translate }}</button>
         </div>
 
       </form>

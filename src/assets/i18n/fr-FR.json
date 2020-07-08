@@ -92,6 +92,8 @@
       "username": "Username",
       "email": "E-mail",
       "sex": "Sexe",
+      "phone-number": "Téléphone",
+      "adress": "Adresse",
       "current-password": "Actuel Mot de passe",
       "new-password": "Nouveau Mot de passe",
       "confirm-new-password": "Confirmer Nouveau Mot de passe"

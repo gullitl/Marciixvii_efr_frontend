@@ -1,38 +1,37 @@
-<div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="100" fxFlex.gt-md="100">
-  <form>
-    <a mat-stroked-button class="m-r-8" color="primary" (click)="search()" disabled>
-      <mat-icon class="icon-4 m-r-2">search</mat-icon>
-    </a>
-    <mat-form-field class="m-r-8" >
-      <mat-label>{{ 'label.first-name' | translate }}</mat-label>
-      <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" >
-    </mat-form-field>
+<mat-card-title>{{ 'clients.edit-client' | translate }}</mat-card-title>
+<form>
+  <a mat-stroked-button class="m-r-8" color="primary" (click)="search()" disabled>
+    <mat-icon class="icon-4 m-r-2">search</mat-icon>
+  </a>
+  <mat-form-field class="m-r-8" >
+    <mat-label>{{ 'label.first-name' | translate }}</mat-label>
+    <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" >
+  </mat-form-field>
 
-    <mat-form-field class="m-r-8" >
-      <mat-label>{{ 'label.first-name' | translate }}</mat-label>
-      <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" >
-    </mat-form-field>
-  </form>
+  <mat-form-field class="m-r-8" >
+    <mat-label>{{ 'label.first-name' | translate }}</mat-label>
+    <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" >
+  </mat-form-field>
+</form>
 
-  <mtx-grid [data]="list"
-            [columns]="columns"
-            [loading]="isLoading"
-            [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
-            [rowHover]="rowHover"
-            [rowStriped]="rowStriped"
-            [columnMovable]="columnMovable"
-            [expandable]="expandable"
-            [expansionTemplate]="expansionTpl"
-            [pageOnFront]="showPaginator"
-            [showPaginator]="showPaginator"
-            [pageSizeOptions]="[5,10,50,100]"
-            [pageIndex]="0"
-            [pageSize]="5"
-            (sortChange)="changeSort($event)"
-            (selectionChange)="changeSelect($event)">
-  </mtx-grid>
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [loading]="isLoading"
+          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [rowHover]="rowHover"
+          [rowStriped]="rowStriped"
+          [columnMovable]="columnMovable"
+          [expandable]="expandable"
+          [expansionTemplate]="expansionTpl"
+          [pageOnFront]="showPaginator"
+          [showPaginator]="showPaginator"
+          [pageSizeOptions]="[5,10,50,100]"
+          [pageIndex]="0"
+          [pageSize]="5"
+          (sortChange)="changeSort($event)"
+          (selectionChange)="changeSelect($event)">
+</mtx-grid>
 
-  <ng-template #expansionTpl let-row>
-      {{row.name}}
-  </ng-template>
-</div>
+<ng-template #expansionTpl let-row>
+    {{row.name}}
+</ng-template>

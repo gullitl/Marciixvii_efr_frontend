@@ -93,6 +93,8 @@
       "username": "Username",
       "email": "E-mail",
       "sex": "Sex",
+      "phone-number": "Phone number",
+      "adress": "Adress",
       "current-password": "Current password",
       "new-password": "New Password",
       "confirm-new-password": "Confirm New Password"

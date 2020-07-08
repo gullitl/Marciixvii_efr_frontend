@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Sexe } from '@shared/utils/enums/sexe.enum';
-import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
-import { AuthenticationService } from '@shared/services/authentication.service';
 import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
 import { NotificationService } from '@shared/services/notification.service';
+import { Client } from '@shared/models/entities/client.entity';
 
 @Component({
   selector: 'app-clients-crud',
@@ -15,25 +14,22 @@ export class ClientsCrudComponent implements OnInit {
   sexeList: string[] = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
 
   constructor(private fb: FormBuilder,
-              private auth: AuthenticationService,
               private service: UtilisateurService,
               private notificationService: NotificationService) {
     this.reactiveForm = this.fb.group({
-      nom: [this.auth.sessionUser.nom, [Validators.required]],
-      postnom: [this.auth.sessionUser.postnom, [Validators.required]],
-      prenom: [this.auth.sessionUser.prenom, [Validators.required]],
-      sexe: [this.auth.sessionUser.sexe === Sexe.Masculin ? this.sexeList[0] : this.sexeList[1]],
-      email: [this.auth.sessionUser.email, [Validators.required, Validators.email]],
-      username: [this.auth.sessionUser.username, [Validators.required]]
+      id: [0],
+      nom: ['', [Validators.required]],
+      prenom: ['', [Validators.required]],
+      sexe: [this.sexeList[0]],
+      telephone: ['', [Validators.required]],
+      photosrc: [''],
+      adresse: ['']
     });
   }
 
   ngOnInit() {}
 
-  username = () => this.auth.sessionUser.username;
-  email = () => this.auth.sessionUser.email;
-  photosrc = () => this.auth.sessionUser.photosrc;
-  completName = () => `${this.auth.sessionUser.prenom} ${this.auth.sessionUser.nom} ${this.auth.sessionUser.postnom}`;
+  photosrc = () => 'assets/images/avatar.jpg';
 
   onSubmit () {
     if (this.reactiveForm.valid) {
@@ -45,34 +41,27 @@ export class ClientsCrudComponent implements OnInit {
         }
       });
 
-      const profil = {
+      const client = {
         nom: this.reactiveForm.value.nom,
-        postnom: this.reactiveForm.value.postnom,
         prenom: this.reactiveForm.value.prenom,
         sexe: sexeValue,
-        email: this.reactiveForm.value.email,
-        username: this.reactiveForm.value.username,
-        id: this.auth.sessionUser.id
+        telephone: this.reactiveForm.value.telephone,
+        photosrc: this.reactiveForm.value.photosrc,
+        adresse: this.reactiveForm.value.adresse,
+        id: this.reactiveForm.value.id
       };
-      this.service.changeProfil(profil).subscribe(p => {
+      this.service.changeProfil(client).subscribe(p => {
         if(p) {
-          const u: Utilisateur = {
-            nom: profil.nom,
-            postnom: profil.postnom,
-            prenom: profil.prenom,
-            sexe: profil.sexe,
-            email: profil.email,
-            username: profil.username,
-            id: profil.id,
-            photosrc: this.auth.sessionUser.photosrc,
-            password: this.auth.sessionUser.password,
-            niveauAcces: this.auth.sessionUser.niveauAcces
+          const u: Client = {
+            id: client.id,
+            nom: client.nom,
+            prenom: client.prenom,
+            sexe: client.sexe,
+            telephone: client.telephone,
+            photosrc: client.photosrc,
+            adresse: client.adresse
           };
           let doReload = false;
-          if(u.username !== this.auth.sessionUser.username) {
-            doReload = true;
-          }
-          this.auth.sessionUser = u;
           this.onClear();
           if(doReload) { location.reload(); }
           this.notificationService.sucess(':: Submitted successfully');
@@ -93,12 +82,13 @@ export class ClientsCrudComponent implements OnInit {
 
   initializeFormGroup() {
     this.reactiveForm.setValue({
-      nom: this.auth.sessionUser.nom,
-      postnom: this.auth.sessionUser.postnom,
-      prenom: this.auth.sessionUser.prenom,
-      sexe: this.auth.sessionUser.sexe === Sexe.Masculin ? this.sexeList[0] : this.sexeList[1],
-      email: this.auth.sessionUser.email,
-      username: this.auth.sessionUser.username
+      id: [0],
+      nom: ['', [Validators.required]],
+      prenom: ['', [Validators.required]],
+      sexe: [this.sexeList[0]],
+      telephone: ['', [Validators.required]],
+      photosrc: [''],
+      adresse: ['', [Validators.required]]
     });
   }
 
@@ -108,25 +98,6 @@ export class ClientsCrudComponent implements OnInit {
       : form.get('email').hasError('email')
       ? 'Not a valid email'
       : '';
-  }
-
-  isFormInvalid = (): boolean => this.reactiveForm.invalid ? true : this.isTheSame() ?? false;
-
-  isTheSame = (): boolean => {
-    let isSexeValueSame: boolean;
-
-    Object.entries(Sexe).filter(([key, value]) => {
-      if(value === this.reactiveForm.value.sexe) {
-        return isSexeValueSame = Number(key) === this.auth.sessionUser.sexe;
-      }
-    });
-
-    return this.reactiveForm.value.nom === this.auth.sessionUser.nom &&
-            this.reactiveForm.value.postnom === this.auth.sessionUser.postnom &&
-            this.reactiveForm.value.prenom === this.auth.sessionUser.prenom &&
-            this.reactiveForm.value.username === this.auth.sessionUser.username &&
-            this.reactiveForm.value.email === this.auth.sessionUser.email &&
-            isSexeValueSame;
   }
 
 }
