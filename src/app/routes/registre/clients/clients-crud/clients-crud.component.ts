@@ -4,6 +4,8 @@ import { Sexe } from '@shared/utils/enums/sexe.enum';
 import { UtilisateurService } from '@shared/services/domain/utilisateur.service';
 import { NotificationService } from '@shared/services/notification.service';
 import { Client } from '@shared/models/entities/client.entity';
+import { Ddd } from '@shared/utils/enums/ddd.enum';
+import { Commune } from '@shared/utils/enums/commune.enum';
 
 @Component({
   selector: 'app-clients-crud',
@@ -12,31 +14,8 @@ import { Client } from '@shared/models/entities/client.entity';
 export class ClientsCrudComponent implements OnInit {
   reactiveForm: FormGroup;
   sexeList: string[] = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
-  dddList: string[] = ['089', '081', '082', '099'];
-  communes: string[] = ['Bandalungwa',
-                        'Barumbu',
-                        'Bumbu',
-                        'Gombe',
-                        'Kasa-Vubu',
-                        'Kimbanseke',
-                        'Kinshasa',
-                        'Kintambo',
-                        'Kisenso',
-                        'Lemba',
-                        'Limete',
-                        'Lingwala',
-                        'Makala',
-                        'Maluku',
-                        'Masina',
-                        'Matete',
-                        'Mont-Ngafula',
-                        'Ndjili',
-                        'Ngaba',
-                        'Ngaliema',
-                        'Ngiri-Ngiri',
-                        'Nsele',
-                        'Selembao'
-                       ];
+  dddList: string[] = Object.values(Ddd).filter(k => typeof Ddd[k as any] === 'string');
+  communes: string[] = Object.values(Commune).filter(k => typeof Commune[k as any] === 'string');
 
   constructor(private fb: FormBuilder,
               private service: UtilisateurService,
