@@ -6,6 +6,6 @@ export class Client extends BaseEntity {
   prenom: string;
   sexe: Sexe;
   photosrc: string;
-  telephone: number;
+  nrTelephone: number;
   adresse: string;
 }

@@ -1,83 +1,115 @@
-<div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33.33" fxFlex.gt-md="25">
-  <mat-card>
-    <div class="text-center">
-      <img class="m-b-8 r-full" [src]="photosrc()" alt="" width="80">
-      <p class="m-t-0 text-grey-500"></p>
-
-      <button mat-raised-button color="primary" href="https://github.com/nzbin" target="_blank">{{ 'button.change-photo' | translate }}</button>
-      <button mat-raised-button color="accent" class="m-l-8">{{ 'button.remove-photo' | translate }}</button>
-    </div>
-  </mat-card>
+<div  >
+  <a fxLayoutAlign="end center" mat-button color="primary" routerLink="/registre/clients" >
+    <mat-icon class="icon-18 m-r-2">account_circle</mat-icon>
+    {{ 'clients.list-client' | translate }}
+  </a>
 </div>
-<div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="66.67" fxFlex.gt-md="75">
-  <mat-card>
-    <mat-card-title>{{ 'clients.edit-client' | translate }}</mat-card-title>
-    <mat-card-content>
-      <form [formGroup]="reactiveForm" class="form-field-full">
-        <input type="hidden" formControlName="id">
-        <div fxLayout="row wrap" fxLayoutGap="4px grid">
-          <div fxFlex="50" fxFlex.lt-md="100">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'label.first-name' | translate }}</mat-label>
-              <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" required>
-              <mat-error *ngIf="reactiveForm.get('prenom').invalid">Please enter Prenom</mat-error>
-            </mat-form-field>
-          </div>
 
-          <div fxFlex="50" fxFlex.lt-md="100">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'label.last-name' | translate }}</mat-label>
-              <input matInput placeholder="{{ 'label.last-name' | translate }}" formControlName="nom" required>
-              <mat-error *ngIf="reactiveForm.get('nom').invalid">Please enter Nom</mat-error>
-            </mat-form-field>
-          </div>
+<div>
+  <div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33.33" fxFlex.gt-md="25">
+    <mat-card>
+      <div class="text-center">
+        <img class="m-b-8 r-full" [src]="photosrc()" alt="" width="80">
+        <p class="m-t-0 text-grey-500"></p>
 
-          <div fxFlex="10" fxFlex.lt-md="100">
-            <mat-form-field appearance="outline">
-              <mat-select required>
-                <mat-option>-- None --</mat-option>
-                <mat-option value="option">Option</mat-option>
-              </mat-select>
-              <mat-label><mat-icon>phone_iphone</mat-icon></mat-label>
-            </mat-form-field>
-          </div>
+        <button mat-raised-button color="primary" href="https://github.com/nzbin" target="_blank">{{ 'button.change-photo' | translate }}</button>
+        <button mat-raised-button color="accent" class="m-l-8">{{ 'button.remove-photo' | translate }}</button>
+      </div>
+    </mat-card>
+  </div>
+  <div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="66.67" fxFlex.gt-md="75">
+    <mat-card>
+      <mat-card-title>{{ 'clients.edit-client' | translate }}</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="reactiveForm" class="form-field-full">
+          <input type="hidden" formControlName="id">
+          <div fxLayout="row wrap" fxLayoutGap="4px grid">
+            <div fxFlex="50" fxFlex.lt-md="100">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'label.first-name' | translate }}</mat-label>
+                <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" required>
+                <mat-error *ngIf="reactiveForm.get('prenom').invalid">Please enter Prenom</mat-error>
+              </mat-form-field>
+            </div>
 
-          <div fxFlex="40" fxFlex.lt-md="100">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'label.phone-number' | translate }}</mat-label>
-              <input matInput placeholder="{{ 'label.phone-number' | translate }}" formControlName="telephone" required>
-              <mat-error *ngIf="reactiveForm.get('telephone').invalid">Please enter Postnom</mat-error>
-            </mat-form-field>
-          </div>
+            <div fxFlex="50" fxFlex.lt-md="100">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'label.last-name' | translate }}</mat-label>
+                <input matInput placeholder="{{ 'label.last-name' | translate }}" formControlName="nom" required>
+                <mat-error *ngIf="reactiveForm.get('nom').invalid">Please enter Nom</mat-error>
+              </mat-form-field>
+            </div>
 
-          <div fxFlex="50" fxFlex.lt-md="100">
-            <mat-radio-group formControlName="sexe" >
-              <div><mat-label>{{ 'label.sex' | translate }} *</mat-label></div>
-              <mat-radio-button *ngFor="let sexe of sexeList" [value]="sexe">{{sexe}}</mat-radio-button>
-            </mat-radio-group>
-          </div>
+            <div fxFlex="10" fxFlex.lt-md="100">
+              <mat-form-field appearance="outline">
+                <mat-label><mat-icon>phone_iphone</mat-icon></mat-label>
+                <mat-select formControlName="ddd" >
+                  <mat-option *ngFor="let ddd of dddList" [value]="ddd">{{ddd}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-          <div fxFlex="100" fxFlex.lt-md="100">
-            <mat-form-field appearance="outline">
+            <div fxFlex="40" fxFlex.lt-md="100">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'label.phone-number' | translate }}</mat-label>
+                <input matInput type="number" placeholder="{{ 'label.phone-number' | translate }}" formControlName="nrTelephone" required>
+                <mat-error *ngIf="reactiveForm.get('nrTelephone').invalid">Please enter Postnom</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="50" fxFlex.lt-md="100">
+              <mat-radio-group formControlName="sexe" >
+                <div><mat-label>{{ 'label.sex' | translate }} *</mat-label></div>
+                <mat-radio-button *ngFor="let sexe of sexeList" [value]="sexe">{{sexe}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div fxFlex="100" fxFlex.lt-md="100">
               <mat-label>{{ 'label.adress' | translate }}</mat-label>
-              <input matInput placeholder="{{ 'label.adress' | translate }}" formControlName="adresse" >
-            </mat-form-field>
+            </div>
+            <div fxFlex="40" fxFlex.lt-md="100">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'label.avenue' | translate }}</mat-label>
+                <input matInput placeholder="{{ 'label.avenue' | translate }}" formControlName="avenue" >
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="10" fxFlex.lt-md="100">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'label.abrev-number' | translate }}</mat-label>
+                <input matInput type="number" placeholder="{{ 'label.abrev-number' | translate }}" formControlName="nrAdresse" >
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'label.neighborhood' | translate }}</mat-label>
+                <mat-select formControlName="commune" >
+                  <mat-option *ngFor="let commune of communes" [value]="commune">{{commune}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex="25" fxFlex.lt-md="100">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'label.district' | translate }}</mat-label>
+                <input matInput placeholder="{{ 'label.district' | translate }}" formControlName="quartier" >
+              </mat-form-field>
+            </div>
+
+
           </div>
 
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <button mat-raised-button color="primary" class="m-l-8" (click)="onSubmit()" [disabled]="true">{{ 'button.save' | translate }}</button>
+            <button mat-raised-button color="accent" class="m-l-8" (click)="onClear()" [disabled]="true">{{ 'button.cancel' | translate }}</button>
+          </div>
 
-        </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
 
-        <div fxLayout="row" fxLayoutAlign="end center">
-          <button mat-raised-button color="primary" class="m-l-8" (click)="onSubmit()" [disabled]="true">{{ 'button.save' | translate }}</button>
-          <button mat-raised-button color="accent" class="m-l-8" (click)="onClear()" [disabled]="true">{{ 'button.cancel' | translate }}</button>
-        </div>
-
-      </form>
-    </mat-card-content>
-  </mat-card>
-
+  </div>
 </div>
-
 
 
 

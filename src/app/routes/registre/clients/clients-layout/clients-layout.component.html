@@ -1,17 +1,4 @@
 <page-header class="bg-purple-500"></page-header>
 
-<div class="matero-row">
-  <div fxLayoutAlign="end center" >
-      <a mat-button color="primary" *ngIf="isCrud" routerLink="/registre/clients-crud" (click)="isCrud=false" >
-        <mat-icon class="icon-18 m-r-8">account_circle</mat-icon>
-        {{ 'clients.edit-client' | translate }}
-      </a>
-      <a mat-button color="primary" *ngIf="!isCrud" routerLink="/registre/clients" (click)="isCrud=true" >
-        <mat-icon class="icon-18 m-r-8">wb_auto</mat-icon>
-        {{ 'clients.list-client' | translate }}
-      </a>
-  </div>
-  <div>
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<router-outlet></router-outlet>
+

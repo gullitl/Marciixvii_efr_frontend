@@ -92,8 +92,12 @@
       "username": "Username",
       "email": "E-mail",
       "sex": "Sexe",
-      "phone-number": "Téléphone",
+      "phone-number": "Nº téléphone",
       "adress": "Adresse",
+      "abrev-number": "Nº",
+      "avenue": "Avenue",
+      "neighborhood": "Commune",
+      "district": "Quartier",
       "current-password": "Actuel Mot de passe",
       "new-password": "Nouveau Mot de passe",
       "confirm-new-password": "Confirmer Nouveau Mot de passe"

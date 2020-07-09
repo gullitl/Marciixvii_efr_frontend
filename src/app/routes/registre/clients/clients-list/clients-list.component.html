@@ -1,37 +1,47 @@
-<mat-card-title>{{ 'clients.edit-client' | translate }}</mat-card-title>
-<form>
-  <a mat-stroked-button class="m-r-8" color="primary" (click)="search()" disabled>
-    <mat-icon class="icon-4 m-r-2">search</mat-icon>
+<div  >
+  <mat-card-title>{{ 'clients.list-client' | translate }}</mat-card-title>
+  <a fxLayoutAlign="end center" mat-button color="primary" routerLink="/registre/clients-crud" >
+    <mat-icon class="icon-18 m-r-2">account_circle</mat-icon>
+    {{ 'clients.edit-client' | translate }}
   </a>
-  <mat-form-field class="m-r-8" >
-    <mat-label>{{ 'label.first-name' | translate }}</mat-label>
-    <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" >
-  </mat-form-field>
 
-  <mat-form-field class="m-r-8" >
-    <mat-label>{{ 'label.first-name' | translate }}</mat-label>
-    <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" >
-  </mat-form-field>
-</form>
+</div>
 
-<mtx-grid [data]="list"
-          [columns]="columns"
-          [loading]="isLoading"
-          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
-          [rowHover]="rowHover"
-          [rowStriped]="rowStriped"
-          [columnMovable]="columnMovable"
-          [expandable]="expandable"
-          [expansionTemplate]="expansionTpl"
-          [pageOnFront]="showPaginator"
-          [showPaginator]="showPaginator"
-          [pageSizeOptions]="[5,10,50,100]"
-          [pageIndex]="0"
-          [pageSize]="5"
-          (sortChange)="changeSort($event)"
-          (selectionChange)="changeSelect($event)">
-</mtx-grid>
+<div>
+  <form>
+    <a mat-stroked-button class="m-r-8" color="primary" (click)="search()" disabled>
+      <mat-icon class="icon-4 m-r-2">search</mat-icon>
+    </a>
+    <mat-form-field class="m-r-8" >
+      <mat-label>{{ 'label.first-name' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" >
+    </mat-form-field>
 
-<ng-template #expansionTpl let-row>
-    {{row.name}}
-</ng-template>
+    <mat-form-field class="m-r-8" >
+      <mat-label>{{ 'label.first-name' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'label.first-name' | translate }}" formControlName="prenom" >
+    </mat-form-field>
+  </form>
+
+  <mtx-grid [data]="list"
+            [columns]="columns"
+            [loading]="isLoading"
+            [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+            [rowHover]="rowHover"
+            [rowStriped]="rowStriped"
+            [columnMovable]="columnMovable"
+            [expandable]="expandable"
+            [expansionTemplate]="expansionTpl"
+            [pageOnFront]="showPaginator"
+            [showPaginator]="showPaginator"
+            [pageSizeOptions]="[5,10,50,100]"
+            [pageIndex]="0"
+            [pageSize]="5"
+            (sortChange)="changeSort($event)"
+            (selectionChange)="changeSelect($event)">
+  </mtx-grid>
+
+  <ng-template #expansionTpl let-row>
+      {{row.name}}
+  </ng-template>
+</div>

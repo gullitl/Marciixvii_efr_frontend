@@ -12,6 +12,31 @@ import { Client } from '@shared/models/entities/client.entity';
 export class ClientsCrudComponent implements OnInit {
   reactiveForm: FormGroup;
   sexeList: string[] = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
+  dddList: string[] = ['089', '081', '082', '099'];
+  communes: string[] = ['Bandalungwa',
+                        'Barumbu',
+                        'Bumbu',
+                        'Gombe',
+                        'Kasa-Vubu',
+                        'Kimbanseke',
+                        'Kinshasa',
+                        'Kintambo',
+                        'Kisenso',
+                        'Lemba',
+                        'Limete',
+                        'Lingwala',
+                        'Makala',
+                        'Maluku',
+                        'Masina',
+                        'Matete',
+                        'Mont-Ngafula',
+                        'Ndjili',
+                        'Ngaba',
+                        'Ngaliema',
+                        'Ngiri-Ngiri',
+                        'Nsele',
+                        'Selembao'
+                       ];
 
   constructor(private fb: FormBuilder,
               private service: UtilisateurService,
@@ -21,9 +46,13 @@ export class ClientsCrudComponent implements OnInit {
       nom: ['', [Validators.required]],
       prenom: ['', [Validators.required]],
       sexe: [this.sexeList[0]],
-      telephone: ['', [Validators.required]],
+      ddd: [this.dddList[1]],
+      nrTelephone: ['', [Validators.required]],
       photosrc: [''],
-      adresse: ['']
+      avenue: [''],
+      nrAdresse: [''],
+      quartier: [''],
+      commune: [this.communes[16]],
     });
   }
 
@@ -45,7 +74,7 @@ export class ClientsCrudComponent implements OnInit {
         nom: this.reactiveForm.value.nom,
         prenom: this.reactiveForm.value.prenom,
         sexe: sexeValue,
-        telephone: this.reactiveForm.value.telephone,
+        nrTelephone: this.reactiveForm.value.nrTelephone,
         photosrc: this.reactiveForm.value.photosrc,
         adresse: this.reactiveForm.value.adresse,
         id: this.reactiveForm.value.id
@@ -57,7 +86,7 @@ export class ClientsCrudComponent implements OnInit {
             nom: client.nom,
             prenom: client.prenom,
             sexe: client.sexe,
-            telephone: client.telephone,
+            nrTelephone: client.nrTelephone,
             photosrc: client.photosrc,
             adresse: client.adresse
           };
@@ -86,7 +115,8 @@ export class ClientsCrudComponent implements OnInit {
       nom: ['', [Validators.required]],
       prenom: ['', [Validators.required]],
       sexe: [this.sexeList[0]],
-      telephone: ['', [Validators.required]],
+      ddd: [this.dddList[1]],
+      nrTelephone: ['', [Validators.required]],
       photosrc: [''],
       adresse: ['', [Validators.required]]
     });
