@@ -119,15 +119,15 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   initializeFormGroup() {
-    this.reactiveForm.setValue({
-      currentPassword: ' ',
-      newPassword: '  ',
-      confirmNewPassword: '  '
+    this.reactiveForm = this.fb.group({
+      currentPassword: ['', Validators.required],
+      newPassword: ['', this.newPasswordValidator],
+      confirmNewPassword: ['', [this.confirmValidator]]
     });
   }
 
-  isTheSame = (): boolean => this.reactiveForm.value.currentPassword === '' ||
-                            this.reactiveForm.value.newPassword === '' ||
+  isTheSame = (): boolean => this.reactiveForm.value.currentPassword === '' &&
+                            this.reactiveForm.value.newPassword === '' &&
                             this.reactiveForm.value.confirmNewPassword === '';
 
 }

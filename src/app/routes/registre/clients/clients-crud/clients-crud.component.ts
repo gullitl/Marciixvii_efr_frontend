@@ -14,8 +14,10 @@ import { Commune } from '@shared/utils/enums/commune.enum';
 export class ClientsCrudComponent implements OnInit {
   reactiveForm: FormGroup;
   sexeList: string[] = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
-  dddList: string[] = Object.values(Ddd).filter(k => typeof Ddd[k as any] === 'string');
-  communes: string[] = Object.values(Commune).filter(k => typeof Commune[k as any] === 'string');
+  dddList: string[] = Object.keys(Ddd).filter(k => typeof Ddd[k as any] === 'number');
+  communes: string[] = Object.keys(Commune).filter(k => typeof Commune[k as any] === 'number');
+
+
 
   constructor(private fb: FormBuilder,
               private service: UtilisateurService,
@@ -38,6 +40,7 @@ export class ClientsCrudComponent implements OnInit {
   ngOnInit() {}
 
   photosrc = () => 'assets/images/avatar.jpg';
+
 
   onSubmit () {
     if (this.reactiveForm.valid) {
