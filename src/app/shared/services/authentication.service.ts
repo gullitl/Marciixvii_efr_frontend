@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '@shared/services/session-storage.service';
 import { Utilisateur } from '@shared/models/entities/utilisateur.entity';
@@ -13,14 +12,13 @@ export class AuthenticationService {
 
   #sessionUserSubject: BehaviorSubject<Utilisateur>;
   #localUserSubject: BehaviorSubject<Utilisateur>;
-  authForm: FormGroup;
   #crtusr = 'currentuser';
 
   constructor(private router: Router,
-              private sessionStrg: SessionStorageService,
-              private localStrg: LocalStorageService) {
-    this.#sessionUserSubject = new BehaviorSubject<Utilisateur>(this.sessionStrg.get(this.#crtusr));
-    this.#localUserSubject = new BehaviorSubject<Utilisateur>(this.localStrg.get(this.#crtusr));
+              private sessionStorage: SessionStorageService,
+              private localStorage: LocalStorageService) {
+    this.#sessionUserSubject = new BehaviorSubject<Utilisateur>(this.sessionStorage.get(this.#crtusr));
+    this.#localUserSubject = new BehaviorSubject<Utilisateur>(this.localStorage.get(this.#crtusr));
   }
 
   get sessionUser(): Utilisateur {
@@ -28,7 +26,7 @@ export class AuthenticationService {
   }
 
   set sessionUser(u: Utilisateur) {
-    this.sessionStrg.set(this.#crtusr, u);
+    this.sessionStorage.set(this.#crtusr, u);
     this.#sessionUserSubject.next(u);
   }
 
@@ -37,13 +35,13 @@ export class AuthenticationService {
   }
 
   set localUser(u: Utilisateur) {
-    this.localStrg.set(this.#crtusr, u);
+    this.localStorage.set(this.#crtusr, u);
     this.#localUserSubject.next(u);
   }
 
   disconnect() {
     // remove user from local storage to log user out
-    this.sessionStrg.remove(this.#crtusr);
+    this.sessionStorage.remove(this.#crtusr);
     this.#sessionUserSubject.next(null);
     this.router.navigateByUrl('/auth/login');
   }
