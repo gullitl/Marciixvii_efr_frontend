@@ -7,6 +7,7 @@ import { TablesDataService } from '../data.service';
 import { TablesKitchenSinkEditComponent } from './edit/edit.component';
 import { MtxGridColumn } from '@ng-matero/extensions';
 import { Router } from '@angular/router';
+import { ClientCrudService } from '../clients-crud/client-crud.service';
 
 @Component({
   selector: 'app-table-clients-list',
@@ -74,8 +75,11 @@ export class TablesKitchenSinkComponent implements OnInit {
   constructor(
     private dataSrv: TablesDataService,
     private router: Router,
+    private clientCrudService: ClientCrudService,
     public dialog: MtxDialog
-  ) {}
+  ) {
+
+  }
 
   ngOnInit() {
     this.list = this.dataSrv.getData();

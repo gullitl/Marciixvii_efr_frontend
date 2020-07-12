@@ -6,7 +6,7 @@ import { NotificationService } from '@shared/services/notification.service';
 import { Client } from '@shared/models/entities/client.entity';
 import { Ddd } from '@shared/utils/enums/ddd.enum';
 import { Commune } from '@shared/utils/enums/commune.enum';
-import { GlobalVariableService } from '@shared/services/global-variable.service';
+import { ClientCrudService } from './client-crud.service';
 
 @Component({
   selector: 'app-clients-crud',
@@ -17,11 +17,10 @@ export class ClientsCrudComponent implements OnInit {
   sexeList: string[] = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
   dddList: string[] = Object.keys(Ddd).filter(k => typeof Ddd[k as any] === 'number');
   communes: string[] = Object.keys(Commune).filter(k => typeof Commune[k as any] === 'number');
-  isEditionMode: boolean;
 
   constructor(private fb: FormBuilder,
               private service: UtilisateurService,
-              private globalVariable: GlobalVariableService,
+              private clientCrudService: ClientCrudService,
               private notificationService: NotificationService) {
     this.reactiveForm = this.fb.group({
       id: [0],
@@ -36,8 +35,6 @@ export class ClientsCrudComponent implements OnInit {
       quartier: [''],
       commune: [this.communes[16]],
     });
-
-    this.isEditionMode = this.globalVariable.isEditionModeVGClientsCrudComponent === undefined ?? false;
 
   }
 
@@ -97,17 +94,17 @@ export class ClientsCrudComponent implements OnInit {
 
   initializeFormGroup() {
     this.reactiveForm.setValue({
-      id: [0],
-      nom: ['', [Validators.required]],
-      prenom: ['', [Validators.required]],
-      sexe: [this.sexeList[0]],
-      ddd: [this.dddList[1]],
-      nrTelephone: ['', [Validators.required]],
-      photosrc: [''],
-      avenue: [''],
-      nrAdresse: [''],
-      quartier: [''],
-      commune: [this.communes[16]],
+      id: 0,
+      nom: '',
+      prenom: '',
+      sexe: this.sexeList[0],
+      ddd: this.dddList[1],
+      nrTelephone: '',
+      photosrc: '',
+      avenue: '',
+      nrAdresse: '',
+      quartier: '',
+      commune: this.communes[16],
     });
   }
 
@@ -119,10 +116,12 @@ export class ClientsCrudComponent implements OnInit {
       : '';
   }
 
-  isFormInvalid = (): boolean => this.reactiveForm.invalid ? true : this.isTheSame() ?? false;
+  isFormInvalid(): boolean {
+    return this.reactiveForm.invalid ? true : this.isTheSame() ?? false;
+  }
 
   isTheSame = (): boolean => {
-    if(this.isEditionMode) {
+    if(this.clientCrudService.isEditionMode) {
       // let isSexeValueSame: boolean;
       // let isDddValueSame: boolean;
       // let isCommuneValueSame: boolean;
@@ -152,13 +151,13 @@ export class ClientsCrudComponent implements OnInit {
 
       Object.entries(Ddd).filter(([key, value]) => {
         if(value === this.reactiveForm.value.ddd) {
-          return isDddValueSame = Number(key) === 2;
+          return isDddValueSame = Number(key) === 1;
         }
       });
 
       Object.entries(Commune).filter(([key, value]) => {
         if(value === this.reactiveForm.value.commune) {
-          return isCommuneValueSame = Number(key) === 17;
+          return isCommuneValueSame = Number(key) === 16;
         }
       });
 
