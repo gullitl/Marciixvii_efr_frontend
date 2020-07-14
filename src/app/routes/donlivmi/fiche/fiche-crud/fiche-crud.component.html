@@ -1,7 +1,7 @@
-<div  >
-  <a fxLayoutAlign="end center" mat-button color="primary" routerLink="/donlivmi/clients" >
+<div >
+  <a fxLayoutAlign="end center" mat-button color="primary" routerLink="/donlivmi/fiche" >
     <mat-icon class="icon-18 m-r-2">account_circle</mat-icon>
-    {{ 'clients.list-client' | translate }}
+    {{ 'fiche.list-fiche' | translate }}
   </a>
 </div>
 
@@ -19,7 +19,7 @@
   </div>
   <div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="66.67" fxFlex.gt-md="75">
     <mat-card>
-      <mat-card-title>{{ 'clients.edit-client' | translate }}</mat-card-title>
+      <mat-card-title>{{ 'fiche.add-fiche' | translate }}</mat-card-title>
       <mat-card-content>
         <form [formGroup]="reactiveForm" class="form-field-full">
           <input type="hidden" formControlName="id">

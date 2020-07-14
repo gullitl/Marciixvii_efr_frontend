@@ -6,11 +6,11 @@ import { NotificationService } from '@shared/services/notification.service';
 import { Client } from '@shared/models/entities/client.entity';
 import { Ddd } from '@shared/utils/enums/ddd.enum';
 import { Commune } from '@shared/utils/enums/commune.enum';
-import { ClientCrudService } from './client-crud.service';
+import { ClientCrudService } from './fiche-crud.service';
 
 @Component({
-  selector: 'app-clients-crud',
-  templateUrl: './clients-crud.component.html',
+  selector: 'app-fiche-crud',
+  templateUrl: './fiche-crud.component.html',
 })
 export class ClientsCrudComponent implements OnInit {
   reactiveForm: FormGroup;

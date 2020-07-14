@@ -2,17 +2,17 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 
-import { TablesKitchenSinkService } from './clients-list.service';
+import { TablesKitchenSinkService } from './fiche-list.service';
 import { TablesDataService } from '../data.service';
 import { TablesKitchenSinkEditComponent } from './edit/edit.component';
 import { MtxGridColumn } from '@ng-matero/extensions';
 import { Router } from '@angular/router';
-import { ClientCrudService } from '../clients-crud/client-crud.service';
+import { ClientCrudService } from '../fiche-crud/fiche-crud.service';
 
 @Component({
-  selector: 'app-table-clients-list',
-  templateUrl: './clients-list.component.html',
-  styleUrls: ['./clients-list.component.scss'],
+  selector: 'app-table-fiche-list',
+  templateUrl: './fiche-list.component.html',
+  styleUrls: ['./fiche-list.component.scss'],
   providers: [TablesKitchenSinkService, TablesDataService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -87,7 +87,7 @@ export class TablesKitchenSinkComponent implements OnInit {
   }
 
   edit(value: any) {
-    this.router.navigateByUrl('/donlivmi/clients-crud');
+    this.router.navigateByUrl('/donlivmi/fiche-crud');
     // const dialogRef = this.dialog.originalOpen(TablesKitchenSinkEditComponent, {
     //   width: '600px',
     //   data: { record: value },

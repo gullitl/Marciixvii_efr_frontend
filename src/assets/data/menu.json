@@ -17,8 +17,8 @@
       "icon": "style",
       "children": [
         {
-          "route": "clients",
-          "name": "clients",
+          "route": "fiche",
+          "name": "fiche",
           "type": "link"
         },
         {

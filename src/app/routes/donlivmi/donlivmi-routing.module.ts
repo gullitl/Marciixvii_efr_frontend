@@ -2,25 +2,25 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DesignIconsComponent } from './icons/icons.component';
-import { ClientsLayoutComponent } from './clients/clients-layout/clients-layout.component';
-import { TablesKitchenSinkComponent } from './clients/clients-list/clients-list.component';
-import { ClientsCrudComponent } from './clients/clients-crud/clients-crud.component';
+import { ClientsLayoutComponent } from './fiche/fiche-layout/fiche-layout.component';
+import { TablesKitchenSinkComponent } from './fiche/fiche-list/fiche-list.component';
+import { ClientsCrudComponent } from './fiche/fiche-crud/fiche-crud.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ClientsLayoutComponent,
     children: [
-      { path: '', redirectTo: 'clients', pathMatch: 'full' },
+      { path: '', redirectTo: 'fiche', pathMatch: 'full' },
       {
-        path: 'clients',
+        path: 'fiche',
         component: TablesKitchenSinkComponent,
-        data: { title: 'Client List' },
+        data: { title: 'Fiche List' },
       },
       {
-        path: 'clients-crud',
+        path: 'fiche-crud',
         component: ClientsCrudComponent,
-        data: { title: 'Add Client' },
+        data: { title: 'Add Fiche' },
       },
     ],
   },

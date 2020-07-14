@@ -2,7 +2,7 @@
     "menu": {
         "dashboard": "Dashboard",
         "donlivmi": "Don liv mi",
-        "donlivmi.clients": "Clients",
+        "donlivmi.fiche": "Record",
         "donlivmi.materiels": "Materiels",
         "donlivmi.icons": "Materiels",
         "material": "Material",
@@ -75,9 +75,9 @@
         "change-password": "Change Password",
         "logout": "logout"
     },
-    "clients": {
-      "edit-client": "Edit Client",
-      "list-client": "List of clients"
+    "fiche": {
+      "add-fiche": "Add Fiche",
+      "list-fiche": "Fiche List"
     },
     "button": {
       "save": "Save",

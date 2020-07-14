@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-clients-layout',
-  templateUrl: './clients-layout.component.html',
+  selector: 'app-fiche-layout',
+  templateUrl: './fiche-layout.component.html',
 })
 export class ClientsLayoutComponent {
-  clientsUrl = '/donlivmi/clients';
+  ficheUrl = '/donlivmi/fiche';
   isCrud: boolean;
 
   constructor(private router: Router) {
-    this.isCrud = router.url === this.clientsUrl;
+    this.isCrud = router.url === this.ficheUrl;
   }
 }
