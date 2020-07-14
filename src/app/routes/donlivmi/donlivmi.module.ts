@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
-import { RegistreRoutingModule } from './registre-routing.module';
+import { DonlivmiRoutingModule } from './donlivmi-routing.module';
 
 import { ClientsLayoutComponent } from './clients/clients-layout/clients-layout.component';
 import { TablesKitchenSinkComponent } from './clients/clients-list/clients-list.component';
@@ -12,8 +12,8 @@ const COMPONENTS = [ClientsLayoutComponent, TablesKitchenSinkComponent, ClientsC
 const COMPONENTS_DYNAMIC = [TablesKitchenSinkEditComponent];
 
 @NgModule({
-  imports: [SharedModule, RegistreRoutingModule],
+  imports: [SharedModule, DonlivmiRoutingModule],
   declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC],
   entryComponents: COMPONENTS_DYNAMIC,
 })
-export class RegistreModule {}
+export class DonlivmiModule {}

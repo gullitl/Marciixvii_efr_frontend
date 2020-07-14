@@ -17,6 +17,7 @@ export class ClientsCrudComponent implements OnInit {
   sexeList: string[] = Object.keys(Sexe).filter(k => typeof Sexe[k as any] === 'number');
   dddList: string[] = Object.keys(Ddd).filter(k => typeof Ddd[k as any] === 'number');
   communes: string[] = Object.keys(Commune).filter(k => typeof Commune[k as any] === 'number');
+  panelOpenState = false;
 
   constructor(private fb: FormBuilder,
               private service: UtilisateurService,

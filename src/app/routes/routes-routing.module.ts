@@ -20,9 +20,9 @@ const routes: Routes = [
         data: { title: 'Dashboard', titleI18n: 'dashboard' },
       },
       {
-        path: 'registre',
-        loadChildren: () => import('./registre/registre.module').then(m => m.RegistreModule),
-        data: { title: 'Registre', titleI18n: 'registre' },
+        path: 'donlivmi',
+        loadChildren: () => import('./donlivmi/donlivmi.module').then(m => m.DonlivmiModule),
+        data: { title: 'Don liv mi', titleI18n: 'donlivmi' },
       },
       {
         path: 'material',

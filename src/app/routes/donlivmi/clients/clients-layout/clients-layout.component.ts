@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './clients-layout.component.html',
 })
 export class ClientsLayoutComponent {
-  clientsUrl = '/registre/clients';
+  clientsUrl = '/donlivmi/clients';
   isCrud: boolean;
 
   constructor(private router: Router) {

@@ -1,10 +1,10 @@
 {
     "menu": {
         "dashboard": "Dashboard",
-        "registre": "Registre",
-        "registre.clients": "Clients",
-        "registre.materiels": "Materiels",
-        "registre.icons": "Materiels",
+        "donlivmi": "Don liv mi",
+        "donlivmi.clients": "Clients",
+        "donlivmi.materiels": "Materiels",
+        "donlivmi.icons": "Materiels",
         "material": "Material",
         "material.form-controls": "Form Controls",
         "material.form-controls.autocomplete": "Autocomplete",

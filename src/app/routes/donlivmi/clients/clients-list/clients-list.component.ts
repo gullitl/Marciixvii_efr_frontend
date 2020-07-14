@@ -87,7 +87,7 @@ export class TablesKitchenSinkComponent implements OnInit {
   }
 
   edit(value: any) {
-    this.router.navigateByUrl('/registre/clients-crud');
+    this.router.navigateByUrl('/donlivmi/clients-crud');
     // const dialogRef = this.dialog.originalOpen(TablesKitchenSinkEditComponent, {
     //   width: '600px',
     //   data: { record: value },

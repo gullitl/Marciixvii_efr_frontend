@@ -11,10 +11,10 @@
       }
     },
     {
-      "route": "registre",
-      "name": "registre",
+      "route": "donlivmi",
+      "name": "donlivmi",
       "type": "sub",
-      "icon": "save",
+      "icon": "style",
       "children": [
         {
           "route": "clients",

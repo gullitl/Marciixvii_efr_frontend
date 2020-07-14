@@ -42,7 +42,7 @@ export class CustomizerComponent implements OnInit {
 
   sendOptions() {
     this.optionsEvent.emit(this.options);
-    this.router.navigateByUrl('/registre/clients');
+    this.router.navigateByUrl('/donlivmi/clients');
     this.closePanel();
   }
 }
